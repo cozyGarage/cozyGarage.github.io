@@ -46,10 +46,10 @@ export const personalInfo = {
   name: 'Trung Nguyen',
   title: 'Full Stack Developer & ML Enthusiast',
   bio: 'Passionate developer with expertise in building web applications and exploring machine learning. I love creating interactive experiences and solving complex problems.',
-  email: 'contact@example.com',
+  email: 'sendtotrungnguyen@outlook.com',
   github: 'https://github.com/cozyGarage',
-  linkedin: 'https://linkedin.com/in/yourprofile',
-  location: 'Vietnam',
+  linkedin: 'https://linkedin.com/in/trungnguyen8888',
+  location: 'Vienna, Austria',
 };
 
 // Projects
@@ -78,6 +78,44 @@ export const projects: Project[] = [
     demoUrl: '/',
     category: 'web',
     featured: true,
+  },
+  {
+    id: 'cozy-snake',
+    title: 'Cozy Snake',
+    description: 'Classic Snake game with responsive controls and smooth animations',
+    longDescription:
+      'A lightweight, performant Snake game built with React and TypeScript. Features touch and keyboard controls, high score persistence, and configurable speed/board size.',
+    technologies: ['React', 'TypeScript', 'HTML5 Canvas', 'Vite', 'CSS3'],
+    image: '/projects/snake.png',
+    demoUrl: '/play/snake',
+    githubUrl: 'https://github.com/cozyGarage/cozy-snake',
+    category: 'game',
+    featured: false,
+  },
+  {
+    id: 'task-manager',
+    title: 'Task Manager',
+    description: 'Kanban-style task manager with drag-and-drop and real-time sync',
+    longDescription:
+      'A full-stack task management application featuring a React frontend and a Node.js/Express backend. Implements drag-and-drop columns, user authentication, and WebSocket-based real-time updates.',
+    technologies: ['React', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'Socket.IO'],
+    image: '/projects/task-manager.png',
+    demoUrl: '/task-manager',
+    githubUrl: 'https://github.com/cozyGarage/task-manager',
+    category: 'web',
+    featured: true,
+  },
+  {
+    id: 'image-classifier',
+    title: 'Image Classifier',
+    description: 'Convolutional neural network for image classification with a Flask API',
+    longDescription:
+      'A research/utility project that trains a CNN for multi-class image classification using TensorFlow. Exposes a simple Flask API for inference and includes scripts for data preprocessing and training.',
+    technologies: ['Python', 'TensorFlow', 'Flask', 'NumPy', 'scikit-learn'],
+    image: '/projects/image-classifier.png',
+    githubUrl: 'https://github.com/cozyGarage/image-classifier',
+    category: 'ml',
+    featured: false,
   },
   // Add more projects here
 ];

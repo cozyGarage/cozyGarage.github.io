@@ -493,6 +493,6 @@ MIT License - feel free to use this as inspiration for your own portfolio!
 
 _Full Stack Developer • ML Enthusiast • Game Developer_
 
-[💻 GitHub](https://github.com/cozyGarage) • [💼 LinkedIn](https://linkedin.com/in/trung-nguyen) • [📧 Email](mailto:contact@example.com)
+[💻 GitHub](https://github.com/cozyGarage) • [💼 LinkedIn](https://linkedin.com/in/trungnguyen8888) • [📧 Email](mailto:sendtotrungnguyen@outlook.com)
 
 </div>

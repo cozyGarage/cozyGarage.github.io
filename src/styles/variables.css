@@ -74,6 +74,49 @@
   --z-loading: 400;
 }
 
+/* Light Theme */
+[data-theme="light"] {
+  /* Colors - Light Theme */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+
+  --text-primary: #212529;
+  --text-secondary: rgba(33, 37, 41, 0.85);
+  --text-tertiary: rgba(33, 37, 41, 0.6);
+
+  --accent-primary: #007bff;
+  --accent-secondary: #0056b3;
+  --accent-primary-rgb: 0, 123, 255;
+
+  /* Original color variables for game board */
+  --color-bg-primary: #f8f9fa;
+  --color-bg-secondary: #e9ecef;
+  --color-bg-tertiary: #dee2e6;
+
+  --color-text-primary: #212529;
+  --color-text-secondary: rgba(33, 37, 41, 0.7);
+  --color-text-muted: rgba(33, 37, 41, 0.5);
+
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-border-hover: rgba(0, 0, 0, 0.2);
+
+  /* Accent Colors */
+  --color-accent-green: #28a745;
+  --color-accent-blue: #007bff;
+  --color-accent-red: #dc3545;
+
+  /* Board Colors */
+  --color-board-dark: #2c5f2d;
+  --color-board-light: #97d077;
+  --color-board-bg: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+
+  /* Shadows - Lighter for light theme */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
 /* Large desktop: Even bigger board */
 @media (min-width: 1400px) {
   :root {

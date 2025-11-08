@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { ThemeProvider } from '../shared/utils/theme';
 import { Navbar } from '../shared/components/layout/Navbar';
 import { HomePage } from '../features/home/HomePage';
 import { ProjectsPage } from '../features/projects/ProjectsPage';
@@ -16,9 +17,10 @@ import '../styles/animations.css';
  */
 export const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <div className="app">
-        <Routes>
+    <ThemeProvider>
+      <BrowserRouter>
+        <div className="app">
+          <Routes>
           {/* Home Page */}
           <Route
             path="/"
@@ -75,8 +77,9 @@ export const App: React.FC = () => {
           {/* Redirects and 404 */}
           <Route path="/othello" element={<Navigate to="/play" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 };

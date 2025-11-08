@@ -91,6 +91,13 @@
 }
 
 /* ========== MOBILE RESPONSIVE ========== */
+/* Navbar Actions (Theme Toggle, etc.) */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
 @media (max-width: 768px) {
   .navbar {
     padding: 0 var(--spacing-md);

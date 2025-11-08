@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { personalInfo, projects, skills } from '../../data';
+import { ContactForm } from '../../shared/components/ContactForm';
 import './home.css';
 
 /**
@@ -173,9 +174,12 @@ export const HomePage: React.FC = () => {
         <div className="container">
           <h2 className="section-title">Get In Touch</h2>
           <p className="contact-text">
-            I&apos;m always open to new opportunities and interesting projects. Feel free to reach
-            out!
+            I&apos;m always open to new opportunities and interesting projects. Let&apos;s connect!
           </p>
+
+          <ContactForm />
+
+          {/* Alternative contact links */}
           <div className="contact-links">
             <a href={`mailto:${personalInfo.email}`} className="contact-link">
               <span className="icon">📧</span>

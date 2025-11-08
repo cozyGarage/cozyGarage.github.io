@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { ThemeToggle } from '../ThemeToggle';
 import './navbar.css';
 
 /**
@@ -86,6 +87,10 @@ export const Navbar: React.FC = () => {
           </a>
         </li>
       </ul>
+
+      <div className="navbar-actions">
+        <ThemeToggle />
+      </div>
     </nav>
   );
 };
