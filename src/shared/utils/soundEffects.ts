@@ -16,12 +16,22 @@ class SoundEffectsManager {
   private volume: number = 100; // 0-100
 
   constructor() {
-    // Initialize AudioContext lazily (on first use)
-    this.initAudioContext();
+    // Don't initialize AudioContext in constructor - do it lazily
+    // This prevents issues in test environments without window
   }
 
   private initAudioContext(): void {
+    // Only initialize once
+    if (this.audioContext !== undefined) return;
+
     try {
+      // Check if we're in a browser environment
+      if (typeof window === 'undefined' || !window.AudioContext) {
+        console.warn('Web Audio API not available (not in browser environment)');
+        this.audioContext = null;
+        return;
+      }
+
       // @ts-expect-error - webkitAudioContext for Safari support
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       this.audioContext = new AudioContextClass();
@@ -64,7 +74,14 @@ class SoundEffectsManager {
    * Quick, satisfying "tick" sound when piece flips
    */
   playFlip(): void {
-    if (!this.enabled || !this.audioContext) return;
+    if (!this.enabled) return;
+
+    // Initialize audio context if not already done
+    if (this.audioContext === undefined) {
+      this.initAudioContext();
+    }
+
+    if (!this.audioContext) return;
 
     const ctx = this.audioContext;
     const currentTime = ctx.currentTime;
@@ -95,7 +112,9 @@ class SoundEffectsManager {
    * Low buzz to indicate error
    */
   playInvalidMove(): void {
-    if (!this.enabled || !this.audioContext) return;
+    if (!this.enabled) return;
+    this.initAudioContext();
+    if (!this.audioContext) return;
 
     const ctx = this.audioContext;
     const currentTime = ctx.currentTime;
@@ -126,7 +145,9 @@ class SoundEffectsManager {
    * Victory fanfare with rising tones
    */
   playGameOver(): void {
-    if (!this.enabled || !this.audioContext) return;
+    if (!this.enabled) return;
+    this.initAudioContext();
+    if (!this.audioContext) return;
 
     const ctx = this.audioContext;
     const currentTime = ctx.currentTime;
