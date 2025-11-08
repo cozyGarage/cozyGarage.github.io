@@ -1,0 +1,131 @@
+/* Game Page Styles - iframe embed */
+
+.game-page {
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column;
+  background: #1a1a1a;
+  position: relative;
+  /* Remove padding-top since navbar flows naturally */
+}
+
+.game-iframe {
+  flex: 1;
+  width: 100%;
+  height: calc(100vh - var(--navbar-height)); /* Full height minus navbar */
+  border: none;
+  background: #1a1a1a;
+  display: block;
+}
+
+/* Minimal navbar for game page */
+.navbar-minimal {
+  height: var(--navbar-height);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 var(--spacing-lg);
+  flex-shrink: 0; /* Don't shrink the navbar */
+}
+
+.navbar-home-icon {
+  font-size: 24px;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-home-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-accent-green);
+  transform: scale(1.1);
+}
+
+/* Mobile adjustments for minimal navbar */
+@media (max-width: 768px) {
+  .navbar-minimal {
+    padding: 0 var(--spacing-md);
+  }
+
+  .navbar-home-icon {
+    font-size: 20px;
+    padding: var(--spacing-xs);
+  }
+}
+
+.game-footer {
+  background: rgba(0, 0, 0, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.game-footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-footer p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.game-link {
+  color: #00b4d8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.game-link:hover {
+  color: #0096c7;
+  text-decoration: underline;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .game-page {
+    height: calc(100vh - 60px);
+  }
+  
+  .game-footer {
+    padding: 0.5rem;
+  }
+  
+  .game-footer p {
+    font-size: 0.8rem;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+/* Loading state */
+.game-iframe::before {
+  content: 'Loading game...';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.2rem;
+}

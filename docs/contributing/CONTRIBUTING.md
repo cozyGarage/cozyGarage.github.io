@@ -1,6 +1,6 @@
-# Contributing to Othello Game
+# Contributing to Portfolio Website
 
-Thank you for your interest in contributing to the Othello Game project! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to the Portfolio Website project! This document provides guidelines and information for contributors.
 
 ## Table of Contents
 
@@ -34,8 +34,8 @@ This project follows a code of conduct to ensure a welcoming environment for all
 
 ```bash
 # Clone the repository
-git clone https://github.com/cozyGarage/Othello.git
-cd Othello
+git clone https://github.com/cozyGarage/cozyGarage.github.io.git
+cd cozyGarage.github.io
 
 # Install dependencies
 bun install
@@ -49,9 +49,11 @@ bun run dev
 
 ## Development Workflow
 
+## Development Workflow
+
 ### 1. Choose an Issue
 
-- Check the [Issues](https://github.com/cozyGarage/Othello/issues) page
+- Check the [Issues](https://github.com/cozyGarage/cozyGarage.github.io/issues) page
 - Look for issues labeled `good first issue` or `help wanted`
 - Comment on the issue to indicate you're working on it
 
@@ -249,7 +251,7 @@ Use the provided PR template which includes:
 - [Project Documentation](./PROJECT_STATUS.md)
 - [Roadmap](./ROADMAP.md)
 - [API Documentation](./packages/othello-engine/README.md)
-- [React Component Documentation](./packages/othello-react/README.md)
+- [React Component Documentation](./packages/portfolio/README.md)
 
 ## Questions?
 

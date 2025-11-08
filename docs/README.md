@@ -2,11 +2,13 @@
 
 This project uses a single, comprehensive README.md as the main documentation. See the [main README](../README.md) for:
 
-- 🎮 **How to Play** - Complete game rules and strategy tips
+- � **About** - Project overview and features
 - 🚀 **Getting Started** - Installation and development setup
-- 📁 **Project Structure** - Code organization overview
-- 🧪 **Testing** - Test coverage and running tests
-- ✨ **Features** - Full feature list and technical details
+- 📁 **Project Structure** - Code organization and architecture
+- 🎨 **Design System** - Colors, typography, and interactive elements
+- 🎮 **Game Integration** - How the Othello game is embedded
+- 🔧 **Development** - Scripts, workflow, and customization
+- 🚀 **Deployment** - GitHub Pages setup and live URLs
 
 ## Contributing
 
