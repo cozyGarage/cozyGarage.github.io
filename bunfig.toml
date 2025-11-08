@@ -1,6 +1,5 @@
 [test]
-# Enable experimental test features
-preload = ["./packages/othello-react/src/setupTests.js"]
+# Test configuration - no preload needed for current tests
 
 [install]
 # Install configuration
