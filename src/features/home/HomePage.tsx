@@ -11,7 +11,7 @@ export const HomePage: React.FC = () => {
   const featuredProjects = projects.filter((p) => p.featured);
 
   return (
-    <div className="home-page">
+    <div className="landing-page">
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
