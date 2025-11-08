@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { personalInfo } from '../../data';
+import { trackFormSubmission } from '../utils/analytics';
 import './ContactForm.css';
 
 interface FormData {
@@ -107,9 +108,15 @@ export const ContactForm: React.FC = () => {
         subject: '',
         message: ''
       });
+
+      // Track successful form submission
+      trackFormSubmission('contact_form');
     } catch (error) {
       console.error('Error sending email:', error);
       setSubmitStatus('error');
+
+      // Track failed form submission
+      trackFormSubmission('contact_form', false);
     } finally {
       setIsSubmitting(false);
     }

@@ -190,4 +190,166 @@ Machine learning is transforming how we build applications...`,
     tags: ['Machine Learning', 'Python', 'AI'],
     readTime: 12,
   },
+  {
+    id: 'react-performance',
+    title: 'Optimizing React Applications for Performance',
+    excerpt: 'Learn essential techniques to improve your React app\'s performance and user experience.',
+    content: `# Optimizing React Applications for Performance
+
+Performance is crucial for modern web applications. This guide covers essential optimization techniques...
+
+## React.memo and useMemo
+
+Prevent unnecessary re-renders with memoization...
+
+## Code Splitting
+
+Implement lazy loading and dynamic imports...
+
+## Bundle Analysis
+
+Use tools like Webpack Bundle Analyzer to identify large dependencies...`,
+    date: '2024-11-08',
+    tags: ['React', 'Performance', 'JavaScript'],
+    readTime: 10,
+  },
+  {
+    id: 'typescript-best-practices',
+    title: 'TypeScript Best Practices for Large Applications',
+    excerpt: 'Essential TypeScript patterns and practices for scalable, maintainable codebases.',
+    content: `# TypeScript Best Practices for Large Applications
+
+TypeScript provides excellent tooling for large-scale applications...
+
+## Type Definitions
+
+Create comprehensive type definitions for your data models...
+
+## Generic Types
+
+Leverage TypeScript generics for reusable components...
+
+## Utility Types
+
+Use built-in utility types like Partial, Pick, and Omit...
+
+## Error Handling
+
+Implement proper error types and handling patterns...`,
+    date: '2024-11-05',
+    tags: ['TypeScript', 'JavaScript', 'Best Practices'],
+    readTime: 15,
+  },
+  {
+    id: 'web-accessibility',
+    title: 'Building Accessible Web Applications',
+    excerpt: 'Essential guidelines for creating inclusive web experiences for all users.',
+    content: `# Building Accessible Web Applications
+
+Web accessibility ensures that your applications are usable by everyone, including people with disabilities...
+
+## Semantic HTML
+
+Use proper semantic elements for screen readers...
+
+## Keyboard Navigation
+
+Ensure all interactive elements are keyboard accessible...
+
+## Color Contrast
+
+Maintain proper color contrast ratios...
+
+## ARIA Labels
+
+Use ARIA attributes to provide additional context...`,
+    date: '2024-10-28',
+    tags: ['Accessibility', 'Web Development', 'UX'],
+    readTime: 11,
+  },
+  {
+    id: 'modern-css',
+    title: 'Modern CSS Techniques and Layouts',
+    excerpt: 'Explore contemporary CSS features for creating beautiful, responsive designs.',
+    content: `# Modern CSS Techniques and Layouts
+
+CSS has evolved significantly with new features for modern web development...
+
+## CSS Grid
+
+Powerful two-dimensional layout system...
+
+## Flexbox Mastery
+
+One-dimensional layout solutions...
+
+## Custom Properties
+
+Dynamic CSS variables for theming...
+
+## Container Queries
+
+Responsive design based on container size...`,
+    date: '2024-10-20',
+    tags: ['CSS', 'Web Development', 'Design'],
+    readTime: 9,
+  },
+  {
+    id: 'api-design',
+    title: 'Designing RESTful APIs: Best Practices',
+    excerpt: 'Learn how to design clean, maintainable, and scalable REST APIs.',
+    content: `# Designing RESTful APIs: Best Practices
+
+Well-designed APIs are the foundation of scalable applications...
+
+## Resource Naming
+
+Use clear, consistent naming conventions...
+
+## HTTP Methods
+
+Proper use of GET, POST, PUT, DELETE...
+
+## Status Codes
+
+Appropriate HTTP status code usage...
+
+## Versioning
+
+API versioning strategies...
+
+## Documentation
+
+Comprehensive API documentation with OpenAPI...`,
+    date: '2024-10-10',
+    tags: ['API', 'Backend', 'REST'],
+    readTime: 13,
+  },
+  {
+    id: 'testing-strategies',
+    title: 'Comprehensive Testing Strategies for Web Applications',
+    excerpt: 'Implement robust testing practices to ensure code quality and reliability.',
+    content: `# Comprehensive Testing Strategies for Web Applications
+
+Testing is essential for maintaining code quality and preventing regressions...
+
+## Unit Testing
+
+Test individual functions and components...
+
+## Integration Testing
+
+Test component interactions and API calls...
+
+## End-to-End Testing
+
+Full user workflow testing...
+
+## Test-Driven Development
+
+Write tests before implementing features...`,
+    date: '2024-09-25',
+    tags: ['Testing', 'Quality Assurance', 'Development'],
+    readTime: 14,
+  },
 ];

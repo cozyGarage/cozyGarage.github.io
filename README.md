@@ -462,8 +462,8 @@ bun run build
 
 - [ ] Add project images and screenshots
 - [ ] Write technical blog posts
-- [ ] Implement contact form
-- [ ] Add light/dark theme toggle
+- [x] Implement contact form
+- [x] Add light/dark theme toggle
 - [ ] Create detailed project pages
 - [ ] Add scroll animations
 - [ ] Implement search functionality
