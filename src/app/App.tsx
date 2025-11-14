@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from '../shared/utils/theme';
 import { Navbar } from '../shared/components/layout/Navbar';
+import { Loading } from '../shared/components/Loading';
 
 // Lazy load route components for better code splitting
 const HomePage = React.lazy(() => import('../features/home/HomePage').then(m => ({ default: m.HomePage })));
@@ -23,7 +24,7 @@ export const App: React.FC = () => {
     <ThemeProvider>
       <BrowserRouter>
         <div className="app">
-          <React.Suspense fallback={<div className="loading">Loading...</div>}>
+          <React.Suspense fallback={<Loading />}>
             <Routes>
           {/* Home Page */}
           <Route

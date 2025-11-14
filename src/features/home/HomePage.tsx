@@ -7,6 +7,49 @@ import './home.css';
 // Define skill categories as a constant to avoid array recreation
 const SKILL_CATEGORIES = ['frontend', 'backend', 'ml', 'tools'] as const;
 
+// Memoized project card component
+const ProjectCard = React.memo<{ project: typeof projects[0] }>(({ project }) => (
+  <div className="project-card">
+    <div className="project-image">
+      <div className="project-image-placeholder">
+        {project.category === 'game' && '🎮'}
+        {project.category === 'web' && '🌐'}
+        {project.category === 'ml' && '🤖'}
+      </div>
+    </div>
+    <div className="project-content">
+      <h3>{project.title}</h3>
+      <p>{project.description}</p>
+      <div className="project-tech">
+        {project.technologies.slice(0, 3).map((tech) => (
+          <span key={tech} className="tech-tag">
+            {tech}
+          </span>
+        ))}
+      </div>
+      <div className="project-links">
+        {project.demoUrl && (
+          <Link to={project.demoUrl} className="project-link">
+            View Demo →
+          </Link>
+        )}
+        {project.githubUrl && (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-link"
+          >
+            GitHub →
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+));
+
+ProjectCard.displayName = 'ProjectCard';
+
 /**
  * Home Page - Portfolio Landing Page
  * Hero section, featured projects, skills, about, and contact
@@ -65,43 +108,7 @@ export const HomePage: React.FC = () => {
           <h2 className="section-title">Featured Projects</h2>
           <div className="projects-grid">
             {featuredProjects.map((project) => (
-              <div key={project.id} className="project-card">
-                <div className="project-image">
-                  <div className="project-image-placeholder">
-                    {project.category === 'game' && '🎮'}
-                    {project.category === 'web' && '🌐'}
-                    {project.category === 'ml' && '🤖'}
-                  </div>
-                </div>
-                <div className="project-content">
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <div className="project-tech">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <span key={tech} className="tech-tag">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="project-links">
-                    {project.demoUrl && (
-                      <Link to={project.demoUrl} className="project-link">
-                        View Demo →
-                      </Link>
-                    )}
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-link"
-                      >
-                        GitHub →
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
+              <ProjectCard key={project.id} project={project} />
             ))}
           </div>
           <div className="section-action">

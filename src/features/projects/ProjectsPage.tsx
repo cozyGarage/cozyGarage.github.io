@@ -6,6 +6,53 @@ import './projects.css';
 // Extract categories to avoid recalculating on every render
 const categories = ['all', ...new Set(projects.map((p) => p.category))];
 
+// Memoized project card component
+const ProjectCard = React.memo<{ project: typeof projects[0] }>(({ project }) => (
+  <div className="project-card">
+    <div className="project-image">
+      <div className="project-image-placeholder">
+        {project.category === 'game' && '🎮'}
+        {project.category === 'web' && '🌐'}
+        {project.category === 'ml' && '🤖'}
+        {project.category === 'other' && '💡'}
+      </div>
+      <div className="project-overlay">
+        <p>{project.longDescription}</p>
+      </div>
+    </div>
+    <div className="project-content">
+      <h3>{project.title}</h3>
+      <p>{project.description}</p>
+      <div className="project-tech">
+        {project.technologies.map((tech) => (
+          <span key={tech} className="tech-tag">
+            {tech}
+          </span>
+        ))}
+      </div>
+      <div className="project-links">
+        {project.demoUrl && (
+          <Link to={project.demoUrl} className="project-link">
+            View Demo →
+          </Link>
+        )}
+        {project.githubUrl && (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-link"
+          >
+            GitHub →
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+));
+
+ProjectCard.displayName = 'ProjectCard';
+
 /**
  * Projects Page
  * Showcase all projects in a grid layout
@@ -46,47 +93,7 @@ export const ProjectsPage: React.FC = () => {
 
         <div className="projects-grid">
           {filteredProjects.map((project) => (
-            <div key={project.id} className="project-card">
-              <div className="project-image">
-                <div className="project-image-placeholder">
-                  {project.category === 'game' && '🎮'}
-                  {project.category === 'web' && '🌐'}
-                  {project.category === 'ml' && '🤖'}
-                  {project.category === 'other' && '💡'}
-                </div>
-                <div className="project-overlay">
-                  <p>{project.longDescription}</p>
-                </div>
-              </div>
-              <div className="project-content">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <div className="project-tech">
-                  {project.technologies.map((tech) => (
-                    <span key={tech} className="tech-tag">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="project-links">
-                  {project.demoUrl && (
-                    <Link to={project.demoUrl} className="project-link">
-                      View Demo →
-                    </Link>
-                  )}
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link"
-                    >
-                      GitHub →
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </div>
