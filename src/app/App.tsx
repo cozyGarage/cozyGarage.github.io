@@ -2,10 +2,13 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from '../shared/utils/theme';
 import { Navbar } from '../shared/components/layout/Navbar';
-import { HomePage } from '../features/home/HomePage';
-import { ProjectsPage } from '../features/projects/ProjectsPage';
-import { BlogPage, BlogPostPage } from '../features/blog/BlogPage';
-import { GamePage } from '../features/game/GamePage';
+
+// Lazy load route components for better code splitting
+const HomePage = React.lazy(() => import('../features/home/HomePage').then(m => ({ default: m.HomePage })));
+const ProjectsPage = React.lazy(() => import('../features/projects/ProjectsPage').then(m => ({ default: m.ProjectsPage })));
+const BlogPage = React.lazy(() => import('../features/blog/BlogPage').then(m => ({ default: m.BlogPage })));
+const BlogPostPage = React.lazy(() => import('../features/blog/BlogPage').then(m => ({ default: m.BlogPostPage })));
+const GamePage = React.lazy(() => import('../features/game/GamePage').then(m => ({ default: m.GamePage })));
 
 // Import global styles
 import '../styles/variables.css';
@@ -20,7 +23,8 @@ export const App: React.FC = () => {
     <ThemeProvider>
       <BrowserRouter>
         <div className="app">
-          <Routes>
+          <React.Suspense fallback={<div className="loading">Loading...</div>}>
+            <Routes>
           {/* Home Page */}
           <Route
             path="/"
@@ -78,6 +82,7 @@ export const App: React.FC = () => {
           <Route path="/othello" element={<Navigate to="/play" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
+          </React.Suspense>
         </div>
       </BrowserRouter>
     </ThemeProvider>

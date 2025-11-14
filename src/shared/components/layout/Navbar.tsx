@@ -12,13 +12,13 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
+  const toggleMobileMenu = React.useCallback(() => {
+    setMobileMenuOpen(prev => !prev);
+  }, []);
 
-  const closeMobileMenu = () => {
+  const closeMobileMenu = React.useCallback(() => {
     setMobileMenuOpen(false);
-  };
+  }, []);
 
   // Don't render navbar on game page - GamePage handles its own navbar
   if (location.pathname === '/play') {

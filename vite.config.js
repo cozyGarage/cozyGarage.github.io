@@ -11,19 +11,25 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    sourcemap: false, // Disable sourcemaps in production for smaller bundle
+    minify: 'esbuild', // Use esbuild for fast minification
     rollupOptions: {
       output: {
-        entryFileNames: 'assets/[name].js',
-        chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name].[ext]'
-      }
-    }
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+        // Manual chunk splitting for better caching
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
+    },
   },
   esbuild: {
     loader: 'tsx',
     include: /src\/.*\.[jt]sx?$/,
     exclude: [],
+    drop: ['console', 'debugger'], // Remove console and debugger in production
   },
   optimizeDeps: {
     esbuildOptions: {

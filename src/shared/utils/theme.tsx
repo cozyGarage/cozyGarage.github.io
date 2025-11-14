@@ -42,19 +42,19 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     }
   }, [theme]);
 
-  const toggleTheme = () => {
+  const toggleTheme = React.useCallback(() => {
     setThemeState(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
-  };
+  }, []);
 
-  const setTheme = (newTheme: Theme) => {
+  const setTheme = React.useCallback((newTheme: Theme) => {
     setThemeState(newTheme);
-  };
+  }, []);
 
-  const value = {
+  const value = React.useMemo(() => ({
     theme,
     toggleTheme,
     setTheme,
-  };
+  }), [theme, toggleTheme, setTheme]);
 
   return (
     <ThemeContext.Provider value={value}>

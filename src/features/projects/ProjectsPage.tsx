@@ -3,6 +3,9 @@ import { projects } from '../../data/portfolio';
 import { Link } from 'react-router-dom';
 import './projects.css';
 
+// Extract categories to avoid recalculating on every render
+const categories = ['all', ...new Set(projects.map((p) => p.category))];
+
 /**
  * Projects Page
  * Showcase all projects in a grid layout
@@ -10,9 +13,16 @@ import './projects.css';
 export const ProjectsPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = React.useState<string>('all');
 
-  const categories = ['all', ...new Set(projects.map((p) => p.category))];
-  const filteredProjects =
-    selectedCategory === 'all' ? projects : projects.filter((p) => p.category === selectedCategory);
+  // Memoize filtered projects to avoid filtering on every render
+  const filteredProjects = React.useMemo(() => 
+    selectedCategory === 'all' ? projects : projects.filter((p) => p.category === selectedCategory),
+    [selectedCategory]
+  );
+
+  // Memoize category click handler
+  const handleCategoryClick = React.useCallback((category: string) => {
+    setSelectedCategory(category);
+  }, []);
 
   return (
     <div className="projects-page">
@@ -27,7 +37,7 @@ export const ProjectsPage: React.FC = () => {
             <button
               key={category}
               className={`filter-btn ${selectedCategory === category ? 'active' : ''}`}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => handleCategoryClick(category)}
             >
               {category.charAt(0).toUpperCase() + category.slice(1)}
             </button>

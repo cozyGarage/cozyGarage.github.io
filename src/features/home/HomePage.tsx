@@ -4,12 +4,25 @@ import { personalInfo, projects, skills } from '../../data';
 import { ContactForm } from '../../shared/components/ContactForm';
 import './home.css';
 
+// Define skill categories as a constant to avoid array recreation
+const SKILL_CATEGORIES = ['frontend', 'backend', 'ml', 'tools'] as const;
+
 /**
  * Home Page - Portfolio Landing Page
  * Hero section, featured projects, skills, about, and contact
  */
 export const HomePage: React.FC = () => {
-  const featuredProjects = projects.filter((p) => p.featured);
+  // Memoize featured projects to avoid filtering on every render
+  const featuredProjects = React.useMemo(() => 
+    projects.filter((p) => p.featured),
+    []
+  );
+
+  // Memoize stats to avoid recalculating on every render
+  const stats = React.useMemo(() => ({
+    projectsCount: projects.length,
+    skillsCount: skills.length,
+  }), []);
 
   return (
     <div className="landing-page">
@@ -104,7 +117,7 @@ export const HomePage: React.FC = () => {
         <div className="container">
           <h2 className="section-title">Skills & Technologies</h2>
           <div className="skills-grid">
-            {(['frontend', 'backend', 'ml', 'tools'] as const).map((category) => {
+            {SKILL_CATEGORIES.map((category) => {
               const categorySkills = skills.filter((s) => s.category === category);
               return (
                 <div key={category} className="skill-category">
@@ -152,11 +165,11 @@ export const HomePage: React.FC = () => {
               </p>
               <div className="about-stats">
                 <div className="stat">
-                  <div className="stat-number">{projects.length}+</div>
+                  <div className="stat-number">{stats.projectsCount}+</div>
                   <div className="stat-label">Projects</div>
                 </div>
                 <div className="stat">
-                  <div className="stat-number">{skills.length}+</div>
+                  <div className="stat-number">{stats.skillsCount}+</div>
                   <div className="stat-label">Skills</div>
                 </div>
                 <div className="stat">
