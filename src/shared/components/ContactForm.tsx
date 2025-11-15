@@ -56,7 +56,7 @@ export const ContactForm: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = React.useCallback((e: any) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -70,9 +70,9 @@ export const ContactForm: React.FC = () => {
         [name]: undefined
       }));
     }
-  };
+  }, [errors]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = React.useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateForm()) {
@@ -120,7 +120,7 @@ export const ContactForm: React.FC = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [formData, validateForm]);
 
   return (
     <div className="contact-form-container">
