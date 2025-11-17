@@ -3,9 +3,9 @@
   "name": "Thanh Nguyen - Portfolio",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "152x152",
-      "type": "image/png"
+      "src": "/favicon-neutral.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     }
   ],
   "start_url": "/",

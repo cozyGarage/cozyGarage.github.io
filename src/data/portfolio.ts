@@ -48,7 +48,7 @@ export const personalInfo = {
   bio: 'Passionate developer with expertise in building web applications and exploring machine learning. I love creating interactive experiences and solving complex problems.',
   email: 'sendtotrungnguyen@outlook.com',
   github: 'https://github.com/cozyGarage',
-  linkedin: 'https://linkedin.com/in/trungnguyen8888',
+  linkedin: 'https://linkedin.com/in/nguyenthanhtrung8888',
   location: 'Vienna, Austria',
 };
 
@@ -80,9 +80,9 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: 'cozy-snake',
-    title: 'Cozy Snake',
-    description: 'Classic Snake game with responsive controls and smooth animations',
+    id: 'resume-engine',
+    title: 'Resume Engine',
+    description: 'AI-powered resume builder and analyzer',
     longDescription:
       'A lightweight, performant Snake game built with React and TypeScript. Features touch and keyboard controls, high score persistence, and configurable speed/board size.',
     technologies: ['React', 'TypeScript', 'HTML5 Canvas', 'Vite', 'CSS3'],

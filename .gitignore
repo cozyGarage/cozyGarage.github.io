@@ -5,11 +5,7 @@
 /.pnp
 .pnp.js
 **/node_modules
-packages/othello-engine/node_modules
-packages/othello-react/node_modules
-packages/othello-engine/dist
-packages/othello-react/dist
-packages/*/dist
+**/node_modules
 
 # testing
 /coverage
@@ -18,7 +14,6 @@ packages/*/dist
 /build
 /dist
 **/dist
-packages/*/dist
 
 # Bun
 .bun

@@ -4,7 +4,8 @@
 
 .navbar {
   height: var(--navbar-height);
-  background: var(--color-bg-secondary);
+  /* Use hero accent for a subtle brand touch on the navbar */
+  background: linear-gradient(90deg, rgba(var(--accent-primary-rgb), 0.04), var(--color-bg-secondary));
   border-bottom: 1px solid var(--color-border);
   display: flex;
   align-items: center;
@@ -61,22 +62,60 @@
 }
 
 .nav-link.active {
-  color: var(--color-accent-green);
-  background: rgba(76, 175, 80, 0.1);
+  color: var(--accent-primary);
+  background: rgba(var(--accent-primary-rgb), 0.06);
 }
 
 /* Primary Action Button (Play) */
 .nav-link.primary {
-  background: var(--color-accent-green);
+  /* CTA gradient, matching hero accents */
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
   color: white;
   font-weight: bold;
   padding: var(--spacing-sm) var(--spacing-lg);
 }
 
 .nav-link.primary:hover {
-  background: #5bc45f;
+  background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-primary) 100%);
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
+}
+
+/* Mobile/Desktop visibility helpers for Play button */
+.nav-play-mobile {
+  display: none;
+}
+
+.nav-theme-mobile {
+  display: none;
+}
+
+.nav-play-desktop {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .nav-play-mobile {
+    display: block;
+  }
+
+  .nav-theme-mobile {
+    display: flex;
+    justify-content: flex-start;
+    padding: var(--spacing-sm) 0;
+  }
+
+  /* Hide desktop actions on mobile to avoid duplicate theme toggles */
+  .navbar-actions {
+    display: none;
+  }
+  .navbar-actions {
+    display: none;
+  }
+
+  .nav-play-desktop {
+    display: none;
+  }
 }
 
 /* Mobile Menu Toggle */
@@ -88,6 +127,15 @@
   font-size: 24px;
   cursor: pointer;
   padding: var(--spacing-sm);
+}
+
+/* Place the hamburger in the top-right corner on mobile */
+.navbar-toggle {
+  position: absolute;
+  right: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: calc(var(--z-navbar) + 10);
 }
 
 /* ========== MOBILE RESPONSIVE ========== */
@@ -139,5 +187,16 @@
 
   .nav-link.primary {
     margin-top: var(--spacing-sm);
+  }
+
+  /* Make mobile nav items evenly spaced and full width */
+  .nav-theme-mobile .nav-theme-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) 0;
+    justify-content: flex-start;
+    color: var(--color-text-primary);
   }
 }

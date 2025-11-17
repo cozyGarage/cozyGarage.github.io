@@ -19,7 +19,8 @@
     "type-check": "tsc --noEmit",
     "predeploy": "bun run build",
     "deploy": "gh-pages -d dist",
-    "validate": "bun run type-check && bun run test"
+    "validate": "bun run type-check && bun run test",
+    "clean" : "rm -rf node_modules dist .turbo .cache"
   },
   "devDependencies": {
     "@types/bun": "latest",

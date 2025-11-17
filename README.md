@@ -60,10 +60,10 @@ Inspired by modern developer portfolios with clean aesthetics, smooth animations
 
 ### 🛠️ Technical Excellence
 
-- **⚡ Lightning Fast**: Powered by Bun runtime (10-100x faster than npm)
+- **⚡ Lightning Fast**: Powered by Bun runtime (1.3+)
 - **🔥 Hot Reload**: Vite dev server with instant updates
 - **🎯 Type-Safe**: Full TypeScript with strict mode
-- **� Modern Tooling**: Monorepo with workspaces, feature-based architecture
+- **🧩 Simple Structure**: Single-package project with feature-based organization (`src/features`) — no monorepo or workspaces
 - **🎨 Modular CSS**: Design tokens and component-scoped styling
 - **📱 Mobile-First**: Responsive design that works everywhere
 
@@ -113,61 +113,52 @@ This project uses **Bun** for its incredible performance:
 
 ---
 
-## � Project Structure
+## 🎯 Make this your Portfolio (Personalization Guide)
+
+Perfect for developers who want a modern, fast, and accessible portfolio — here are the practical steps to make this site your own:
+
+- 1) Personal info: Update your name, title, short bio and links in `src/data/portfolio.ts`.
+- 2) Projects: Add new `Project` entries to `src/data/portfolio.ts` and set `featured: true` for those you want on the landing page. Use a unique `id` and provide `demoUrl` and `githubUrl` as needed.
+- 3) Images & assets: Replace files in `public/` or add project images to `public/projects`. Update `image` fields in the `projects` entries.
+- 4) Add technical blog posts in `src/data/portfolio.ts` (the `blogPosts` array), or create a content folder and import Markdown/MDX if you want a richer workflow.
+- 5) Change theme colors and spacing in `src/styles/variables.css`. This file contains the CSS custom properties used across the site.
+- 6) Hide or show pages: Change routes in `src/app/App.tsx` to add or remove pages. Remove the `GamePage` route if you don't want the iframe embedded.
+  - 7) Contact & analytics: Update the contact email in `src/data/portfolio.ts`. Analytics is initialized in `src/shared/utils/analytics.ts` — supply your tracking id or disable it for local development.
+- 8) Testing & type check: `bun run test` (unit tests) and `bun run type-check` for types — ensure everything compiles cleanly before deploying.
+
+### Personalization Checklist
+
+1. Edit `personalInfo` in `src/data/portfolio.ts`.
+2. Replace project images in `public/projects` and add projects to the `projects` array.
+3. Update `public/manifest.json` and `index.html` meta tags for SEO and social sharing.
+4. Replace favicon(s) if you want unique branding: check `public/favicon-*.png` files.
+5. Run `bun run dev` to preview changes locally.
+
+> Tip: Keep copy short and impactful — the homepage is the first interaction your visitors have.
+
+
+## Project Structure
+
+This repository is a single-package portfolio website. The structure is intentionally simple:
 
 ```
-packages/
-├── othello-engine/          # Game logic (pure TypeScript)
-│   ├── src/
-│   │   ├── OthelloGameEngine.ts
-│   │   └── index.ts
-│   └── package.json
-│
-└── portfolio/               # Portfolio Website
-    ├── src/
-    │   ├── app/             # Application core
-    │   │   └── App.tsx     # Main routing component
-    │   │
-    │   ├── features/       # Feature modules (self-contained)
-    │   │   ├── home/
-    │   │   │   ├── HomePage.tsx
-    │   │   │   └── home.css
-    │   │   ├── projects/
-    │   │   │   ├── ProjectsPage.tsx
-    │   │   │   └── projects.css
-    │   │   ├── blog/
-    │   │   │   ├── BlogPage.tsx
-    │   │   │   └── blog.css
-    │   │   └── game/       # iframe embed
-    │   │       ├── GamePage.tsx
-    │   │       └── game.css
-    │   │
-    │   ├── shared/         # Shared code
-    │   │   ├── components/
-    │   │   │   └── layout/
-    │   │   │       ├── Navbar.tsx
-    │   │   │       └── navbar.css
-    │   │   ├── utils/
-    │   │   │   └── favicon.ts
-    │   │   └── config/
-    │   │       └── features.ts
-    │   │
-    │   ├── data/           # Content & data
-    │   │   ├── portfolio.ts
-    │   │   └── index.ts
-    │   │
-    │   ├── styles/         # Global styles
-    │   │   ├── variables.css
-    │   │   ├── layout.css
-    │   │   └── animations.css
-    │   │
-    │   └── index.tsx       # Entry point
-    │
-    ├── public/             # Static assets
-    ├── package.json
-    ├── vite.config.js
-    └── tsconfig.json
+.
+├── public/               # Static assets (images, manifest, favicon)
+├── src/                  # Application source
+│   ├── app/              # App core and routing (`App.tsx`)
+│   ├── features/         # Feature modules (home, projects, blog, game)
+│   ├── shared/           # Shared components and utilities
+│   ├── data/             # Content and site data (projects, skills, blog posts)
+│   ├── styles/           # Global CSS variables and utilities
+│   └── index.tsx         # Entry point
+├── docs/                 # Project documentation and contribution guides
+├── .github/              # CI workflows and community files
+├── package.json          # Scripts and dependencies
+├── vite.config.js        # Development/build config
+└── tsconfig.json         # TypeScript config
 ```
+
+This keeps the repository focused and easy to maintain as a personal website — no separate engine packages are required because the Othello game is embedded via an iframe.
 
 ---
 
@@ -470,6 +461,38 @@ bun run build
 - [ ] Add analytics tracking
 
 ---
+
+## 🧭 SEO & Best Practices for Portfolio Sites
+
+- Title & Description: Edit the meta title/description in `public/index.html`.
+- Open Graph: Add `og:title`, `og:description`, `og:image` to improve link previews on social platforms.
+- Lighthouse: Use Chrome Lighthouse to test performance/accessibility; you can improve scores by compressing images and lazy-loading content.
+- Performance: Keep the projects list small on the homepage; use the Projects page to show the full list.
+- Accessibility: Use semantic HTML and check color contrast in `src/styles/variables.css`.
+
+## 🔒 Privacy & Analytics
+
+- The project initializes analytics from `src/shared/utils/analytics.ts`. If you prefer not to collect analytics, set the utility to a no-op or remove the snippet.
+
+## 🔧 Husky & Commit Lint
+
+- Husky (git hooks) and commitlint were previously used for local and CI commit validation. For this personal portfolio the local Husky hooks are optional and have been removed from the repository to keep development friction low.
+- If you want to re-enable Husky locally, run `bun run prepare`. This will re-install the hook scripts.
+- CI commitlint checks have been commented out. To enforce Conventional Commits in CI, re-enable the commitlint step in `.github/workflows/pr-validation.yml`.
+
+---
+
+## 👩‍💻 Contributing & Customization Tips
+
+- Use the feature-based architecture: add a new folder under `src/features` for major sections.
+- Maintain a small `README` inside `src/features` for feature-specific documentation.
+- Tests: Add tests alongside components in `src/shared/components`.
+
+## 🧪 Troubleshooting
+
+- If the dev server doesn't start, run `bun install` again and verify `bun` is installed properly. On Windows, Bun is supported via the official binary.
+- If TypeScript errors block you, use `npx tsc --noEmit` to list issues (or `bun run type-check`).
+
 
 ## 📄 License
 

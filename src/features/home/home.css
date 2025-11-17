@@ -360,14 +360,15 @@
 }
 
 .btn-primary {
-  background: var(--accent-primary);
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
   color: white;
+  box-shadow: 0 6px 20px rgba(var(--accent-primary-rgb), 0.12);
 }
 
 .btn-primary:hover {
-  background: var(--accent-secondary);
+  background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-primary) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.4);
+  box-shadow: 0 8px 30px rgba(var(--accent-primary-rgb), 0.18);
 }
 
 .btn-secondary {

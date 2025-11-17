@@ -24,10 +24,11 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Validate commit messages
-        run: |
-          # Check if commits follow conventional format
-          npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
+      # Commit message validation removed from CI for personal portfolio
+      # If you want to enforce Conventional Commits in CI, re-enable the step below
+      # - name: Validate commit messages
+      #   run: |
+      #     npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
 
       - name: Run validation
         run: bun run validate
@@ -40,12 +41,13 @@ jobs:
 
       - name: Check bundle size
         run: |
-          # Simple bundle size check
-          if [ -f "packages/othello-react/dist/assets/index-*.js" ]; then
-            BUNDLE_SIZE=$(stat -c%s packages/othello-react/dist/assets/index-*.js | head -1)
+          # Check build artifact size in dist (single-package site)
+          if ls dist/assets/index-*.js >/dev/null 2>&1; then
+            BUNDLE_SIZE=$(stat -c%s dist/assets/index-*.js | head -1)
             echo "Bundle size: $BUNDLE_SIZE bytes"
-            # Warn if bundle exceeds 1MB
             if [ "$BUNDLE_SIZE" -gt 1048576 ]; then
               echo "::warning::Bundle size ($BUNDLE_SIZE bytes) exceeds 1MB"
             fi
+          else
+            echo "No dist assets found to check"
           fi

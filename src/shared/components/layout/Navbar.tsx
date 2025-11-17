@@ -63,11 +63,11 @@ export const Navbar: React.FC = () => {
 
         <li className="nav-item">
           <Link
-            className={`nav-link primary ${location.pathname === '/play' ? 'active' : ''}`}
-            to="/play"
+            className="nav-link"
+            to={{ pathname: '/', hash: '#contact' }}
             onClick={closeMobileMenu}
           >
-            Play Othello ⚫⚪
+            Contact
           </Link>
         </li>
 
@@ -80,17 +80,21 @@ export const Navbar: React.FC = () => {
             Blog
           </Link>
         </li>
-
         <li className="nav-item">
-          <a className="nav-link" href="#contact" onClick={closeMobileMenu}>
-            Contact
-          </a>
+          <div className="nav-link nav-theme-wrapper" onClick={closeMobileMenu}>
+            <ThemeToggle />
+          </div>
+        </li>
+        <li className="nav-item">
+          <Link
+            className={`nav-link primary ${location.pathname === '/play' ? 'active' : ''}`}
+            to="/play"
+            onClick={closeMobileMenu}
+          >
+            Play Othello ⚫⚪
+          </Link>
         </li>
       </ul>
-
-      <div className="navbar-actions">
-        <ThemeToggle />
-      </div>
     </nav>
   );
 };
