@@ -1,11 +1,36 @@
+/**
+ * Blog Module
+ * 
+ * Displays blog posts in a grid layout with filtering and individual post pages.
+ * Blog content is imported from src/data/blog/ for better organization.
+ * 
+ * Components:
+ * - BlogPage: List view of all blog posts
+ * - BlogPostPage: Individual blog post view
+ * - BlogCard: Memoized card component for list items
+ * 
+ * @module features/blog
+ */
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from '../../data/portfolio';
 import './blog.css';
 
-// Memoized blog card component to prevent unnecessary re-renders
+/**
+ * BlogCard Component
+ * 
+ * Displays a summary card for a blog post with:
+ * - Publication date and read time
+ * - Title and excerpt
+ * - Tags for categorization
+ * - Link to full post
+ * 
+ * Memoized to prevent unnecessary re-renders when parent updates.
+ * Only re-renders if the post prop changes.
+ */
 const BlogCard = React.memo<{ post: typeof blogPosts[0] }>(({ post }) => {
-  // Memoize date formatting
+  // Memoize date formatting to avoid recalculating on every render
   const formattedDate = React.useMemo(
     () => new Date(post.date).toLocaleDateString(),
     [post.date]

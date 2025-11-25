@@ -193,10 +193,6 @@ export const HomePage: React.FC = () => {
       <section id="contact" className="contact">
         <div className="container">
           <h2 className="section-title">Get In Touch</h2>
-          <p className="contact-text">
-            I&apos;m always open to new opportunities and interesting projects. Let&apos;s connect!
-          </p>
-
           <ContactForm />
 
           {/* Alternative contact links */}
