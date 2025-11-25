@@ -2,19 +2,35 @@
 
 This project uses a single, comprehensive README.md as the main documentation. See the [main README](../README.md) for:
 
-- � **About** - Project overview and features
+- 📖 **About** - Project overview and features
 - 🚀 **Getting Started** - Installation and development setup
-- 📁 **Project Structure** - Code organization and architecture
-- 🎨 **Design System** - Colors, typography, and interactive elements
-- 🎮 **Game Integration** - How the Othello game is embedded
+- 📁 **Project Structure** - Code organization and architecture (flattened single-package design)
+- 🎨 **Design System** - Colors, typography, and unified button styles
+- 🎮 **Game Integration** - How the Othello game is embedded via iframe
+- 📝 **Blog System** - Organized blog content in `src/data/blog/` with detailed technical posts
 - 🔧 **Development** - Scripts, workflow, and customization
 - 🚀 **Deployment** - GitHub Pages setup and live URLs
 
-## Contributing
+## Recent Updates (November 2025)
 
-- **[CONTRIBUTING.md](./contributing/CONTRIBUTING.md)** - Guidelines for contributors
-- **[ROADMAP.md](./contributing/ROADMAP.md)** - Future development plans
+### Architecture Improvements
+- **Flattened repository structure** - Removed monorepo traces for simpler single-package design
+- **Blog content organization** - Separated blog posts into dedicated module (`src/data/blog/`)
+- **Comprehensive documentation** - Added JSDoc comments throughout codebase
 
-## GitHub Integration
+### Features Added
+- **Hash-based navigation** - ScrollToHash component for smooth anchor navigation across routes
+- **Contact link fix** - Proper routing from any page to home contact section
+- **Unified button styles** - All hero buttons use consistent gradient design
+- **Neutral favicon** - Custom SVG favicon replacing Othello-specific icon
+- **3 detailed blog posts** - Production-quality technical content with code examples
 
-The templates in `contributing/templates/` are symlinked to `.github/` for GitHub to recognize them.
+### Build & Deployment
+- **GitHub Pages optimization** - Added `.nojekyll` for proper asset serving
+- **CI/CD updates** - Streamlined workflows, removed commitlint enforcement
+- **Bundle optimization** - Manual chunk splitting and tree shaking configured
+
+## Additional Documentation
+
+- **[OPTIMIZATION_SUMMARY.md](./OPTIMIZATION_SUMMARY.md)** - Performance improvements and benchmarks
+- **[PERFORMANCE.md](./PERFORMANCE.md)** - Detailed performance metrics and strategies
