@@ -35,6 +35,8 @@ export const GamePage: React.FC = () => {
         title="Othello Game - Play the classic strategy board game"
         allow="fullscreen"
         loading="lazy"
+        sandbox="allow-scripts allow-forms allow-popups"
+        referrerPolicy="no-referrer"
       />
 
       {/* Optional: Game Info Footer */}

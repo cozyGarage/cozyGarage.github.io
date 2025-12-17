@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ThemeProvider } from '../shared/utils/theme';
 import { Navbar } from '../shared/components/layout/Navbar';
 import { HomePage } from '../features/home/HomePage';
@@ -20,6 +20,7 @@ export const App: React.FC = () => {
     <ThemeProvider>
       <BrowserRouter>
         <div className="app">
+          <ScrollToHash />
           <Routes>
           {/* Home Page */}
           <Route
@@ -91,4 +92,46 @@ export const App: React.FC = () => {
       </BrowserRouter>
     </ThemeProvider>
   );
+};
+
+/**
+ * ScrollToHash
+ * Watches route changes and scrolls to the element indicated by the hash (e.g. `#contact`).
+ * Retries for a longer period to allow lazy-loaded content to mount.
+ */
+const ScrollToHash: React.FC = () => {
+  const location = useLocation();
+
+  React.useEffect(() => {
+    const hash = location.hash;
+    // small delay to allow lazy components to mount
+    const startDelay = 50;
+    if (!hash) {
+      // No hash — scroll to top
+      setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), startDelay);
+      return;
+    }
+
+    const id = hash.replace('#', '');
+    let attempts = 0;
+    const maxAttempts = 40; // longer retry window
+    const intervalMs = 150;
+
+    const tryScroll = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        // Use requestAnimationFrame to ensure layout is stable
+        requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+        return;
+      }
+      attempts += 1;
+      if (attempts < maxAttempts) {
+        setTimeout(tryScroll, intervalMs);
+      }
+    };
+
+    setTimeout(tryScroll, startDelay);
+  }, [location]);
+
+  return null;
 };
