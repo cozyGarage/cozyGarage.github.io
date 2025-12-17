@@ -109,17 +109,29 @@ export const ProjectsPage: React.FC = () => {
                 {project.featured && <span className="featured-badge">Featured</span>}
                 <Link to={`/projects/${project.id}`} className="project-image-link">
                   <div className="project-image">
-                    <div className="project-image-placeholder">
-                      {project.category === 'game' && '🎮'}
-                      {project.category === 'web' && '🌐'}
-                      {project.category === 'ml' && '🤖'}
-                      {project.category === 'other' && '💡'}
-                    </div>
-                    <div className="project-overlay">
-                      <p>{project.longDescription}</p>
-                      <span className="view-details">View Details →</span>
-                    </div>
+                  {/* Use optimized images when available (falls back to original src) */}
+                  <div className="project-image-media">
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="project-image-element"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="project-image-placeholder">
+                        {project.category === 'game' && '🎮'}
+                        {project.category === 'web' && '🌐'}
+                        {project.category === 'ml' && '🤖'}
+                        {project.category === 'other' && '💡'}
+                      </div>
+                    )}
                   </div>
+                  <div className="project-overlay">
+                    <p>{project.longDescription}</p>
+                    <span className="view-details">View Details →</span>
+                  </div>
+                </div>
                 </Link>
                 <div className="project-content">
                   <h3>
