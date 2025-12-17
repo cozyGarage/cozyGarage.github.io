@@ -3,9 +3,15 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import { ThemeProvider } from '../shared/utils/theme';
 import { Navbar } from '../shared/components/layout/Navbar';
 import { HomePage } from '../features/home/HomePage';
-import { ProjectsPage, ProjectDetailPage } from '../features/projects/ProjectsPage';
-import { BlogPage, BlogPostPage } from '../features/blog/BlogPage';
-import { GamePage } from '../features/game/GamePage';
+import { Loading } from '../shared/components/Loading';
+
+// Lazy load larger route components to reduce initial bundle size
+const ProjectsPage = React.lazy(() => import('../features/projects/ProjectsPage').then(m => ({ default: m.ProjectsPage })));
+const ProjectDetailPage = React.lazy(() => import('../features/projects/ProjectsPage').then(m => ({ default: m.ProjectDetailPage })));
+const BlogPage = React.lazy(() => import('../features/blog/BlogPage').then(m => ({ default: m.BlogPage })));
+const BlogPostPage = React.lazy(() => import('../features/blog/BlogPage').then(m => ({ default: m.BlogPostPage })));
+const GamePage = React.lazy(() => import('../features/game/GamePage').then(m => ({ default: m.GamePage })));
+
 
 // Import global styles
 import '../styles/variables.css';
@@ -32,6 +38,9 @@ export const App: React.FC = () => {
               </>
             }
           />
+
+          <React.Suspense fallback={<Loading />}>
+
 
           {/* Projects Page */}
           <Route
@@ -87,6 +96,7 @@ export const App: React.FC = () => {
           {/* Redirects and 404 */}
           <Route path="/othello" element={<Navigate to="/play" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
+          </React.Suspense>
           </Routes>
         </div>
       </BrowserRouter>

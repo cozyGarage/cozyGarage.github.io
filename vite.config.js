@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
+export default defineConfig(({ command, mode }) => ({
+  plugins: [
+    react(),
+    // Include bundle visualizer when ANALYZE=true
+    process.env.ANALYZE === 'true' ? visualizer({ filename: 'dist/stats.html', gzipSize: true }) : null,
+  ].filter(Boolean),
   base: '/', // Changed from '/Othello/' for portfolio site
   server: {
     port: 3000,
@@ -20,7 +25,9 @@ export default defineConfig({
         assetFileNames: 'assets/[name]-[hash].[ext]',
         // Manual chunk splitting for better caching
         manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          react: ['react'],
+          'react-dom': ['react-dom'],
+          router: ['react-router-dom'],
         },
       },
     },
@@ -44,4 +51,4 @@ export default defineConfig({
     globals: true,
     environment: 'happy-dom',
   },
-});
+}));
