@@ -212,6 +212,231 @@
   padding: 0;
 }
 
+/* Search and Filter Controls */
+.blog-controls {
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.search-box {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  border: 2px solid var(--bg-tertiary);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.1);
+}
+
+.clear-search {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 1.25rem;
+  transition: color 0.2s ease;
+}
+
+.clear-search:hover {
+  color: var(--text-primary);
+}
+
+.tag-filter {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.tag-filter-btn {
+  background: var(--bg-secondary);
+  border: 2px solid var(--bg-tertiary);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tag-filter-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.tag-filter-btn.active {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: white;
+}
+
+.blog-results {
+  max-width: 1200px;
+  margin: 0 auto 1rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.no-results {
+  max-width: 1200px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 3rem;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+}
+
+.no-results p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.reset-filters {
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-filters:hover {
+  background: var(--accent-secondary);
+  transform: translateY(-2px);
+}
+
+/* Clickable tags in blog cards */
+.blog-tags .tag {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.blog-tags .tag:hover {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+  transform: scale(1.05);
+}
+
+/* Reading Progress Bar */
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  z-index: 1000;
+  transition: width 0.1s ease;
+}
+
+.post-progress {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+/* Social Share Buttons */
+.social-share {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--bg-tertiary);
+}
+
+.share-label {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: white;
+}
+
+.share-btn.twitter {
+  background: #1da1f2;
+}
+
+.share-btn.linkedin {
+  background: #0077b5;
+}
+
+.share-btn.facebook {
+  background: #1877f2;
+}
+
+.share-btn.copy-link {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-size: 1.25rem;
+}
+
+.share-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.share-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Post Navigation */
+.post-navigation {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--bg-tertiary);
+  text-align: center;
+}
+
+.all-posts-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+}
+
+.all-posts-link:hover {
+  color: var(--accent-secondary);
+  transform: translateX(5px);
+}
+
 @media (max-width: 768px) {
   .blog-page,
   .blog-post-page {
@@ -229,5 +454,17 @@
 
   .blog-post {
     padding: 2rem 1.5rem;
+  }
+
+  .tag-filter {
+    justify-content: flex-start;
+  }
+
+  .social-share {
+    flex-wrap: wrap;
+  }
+
+  .post-meta {
+    flex-wrap: wrap;
   }
 }

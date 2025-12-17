@@ -32,24 +32,38 @@ export const ContactForm: React.FC = () => {
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
+    // Name validation
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+    } else if (formData.name.trim().length > 100) {
+      newErrors.name = 'Name must be less than 100 characters';
     }
 
+    // Email validation
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
     }
 
+    // Subject validation
     if (!formData.subject.trim()) {
       newErrors.subject = 'Subject is required';
+    } else if (formData.subject.trim().length < 3) {
+      newErrors.subject = 'Subject must be at least 3 characters';
+    } else if (formData.subject.trim().length > 200) {
+      newErrors.subject = 'Subject must be less than 200 characters';
     }
 
+    // Message validation
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     } else if (formData.message.trim().length < 10) {
       newErrors.message = 'Message must be at least 10 characters';
+    } else if (formData.message.trim().length > 5000) {
+      newErrors.message = 'Message must be less than 5000 characters';
     }
 
     setErrors(newErrors);
@@ -83,23 +97,28 @@ export const ContactForm: React.FC = () => {
     setSubmitStatus('idle');
 
     try {
-      // EmailJS configuration - you'll need to set up your own service
-      // For now, we'll simulate sending an email
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      // EmailJS configuration
+      // To enable, install @emailjs/browser: npm install @emailjs/browser
+      // Then uncomment and configure below:
+      
+      /*
+      const emailjs = await import('@emailjs/browser');
+      await emailjs.send(
+        'YOUR_SERVICE_ID',     // Get from EmailJS dashboard
+        'YOUR_TEMPLATE_ID',    // Get from EmailJS dashboard
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: personalInfo.email,
+        },
+        'YOUR_PUBLIC_KEY'      // Get from EmailJS dashboard
+      );
+      */
 
-      // In a real implementation, you would use:
-      // await emailjs.send(
-      //   'YOUR_SERVICE_ID',
-      //   'YOUR_TEMPLATE_ID',
-      //   {
-      //     from_name: formData.name,
-      //     from_email: formData.email,
-      //     subject: formData.subject,
-      //     message: formData.message,
-      //     to_email: personalInfo.email,
-      //   },
-      //   'YOUR_PUBLIC_KEY'
-      // );
+      // For now, simulate sending (remove this when EmailJS is configured)
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
       setSubmitStatus('success');
       setFormData({
@@ -179,7 +198,12 @@ export const ContactForm: React.FC = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="message" className="form-label">Message *</label>
+            <div className="form-label-row">
+              <label htmlFor="message" className="form-label">Message *</label>
+              <span className="char-count">
+                {formData.message.length} / 5000
+              </span>
+            </div>
             <textarea
               id="message"
               name="message"
@@ -202,15 +226,25 @@ export const ContactForm: React.FC = () => {
           </button>
 
           {submitStatus === 'success' && (
-            <div className="form-success">
-              ✅ Message sent successfully! I&apos;ll get back to you soon.
+            <div className="form-message success">
+              <span className="message-icon">✅</span>
+              <div>
+                <strong>Message sent successfully!</strong>
+                <p>I&apos;ll get back to you as soon as possible.</p>
+              </div>
             </div>
           )}
 
           {submitStatus === 'error' && (
-            <div className="form-error">
-              ❌ Failed to send message. Please try again or contact me directly at{' '}
-              <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
+            <div className="form-message error">
+              <span className="message-icon">❌</span>
+              <div>
+                <strong>Failed to send message</strong>
+                <p>
+                  Please try again or contact me directly at{' '}
+                  <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
+                </p>
+              </div>
             </div>
           )}
         </form>
