@@ -1,3 +1,4 @@
+# Portfolio - Trung Nguyen
 # Portfolio Website - Trung Nguyen �
 
 <div align="center">
