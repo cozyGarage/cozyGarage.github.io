@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { projects } from '../../data/portfolio';
 import { Link, useParams } from 'react-router-dom';
 import './projects.css';
+import { OptimizedImage } from '../../shared/components/OptimizedImage';
 
 /**
  * Projects Page
@@ -112,11 +113,10 @@ export const ProjectsPage: React.FC = () => {
                   {/* Use optimized images when available (falls back to original src) */}
                   <div className="project-image-media">
                     {project.image ? (
-                      <img
+                      <OptimizedImage
                         src={project.image}
                         alt={project.title}
                         className="project-image-element"
-                        loading="lazy"
                       />
                     ) : (
                       <div className="project-image-placeholder">
