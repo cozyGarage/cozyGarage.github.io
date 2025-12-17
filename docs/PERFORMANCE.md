@@ -167,21 +167,32 @@ Potential areas for further improvement:
 ### Development
 Use React DevTools Profiler to identify expensive renders:
 ```bash
-npm run dev
+bun run dev
 ```
 
 ### Production Build
-Analyze bundle size:
+Analyze bundle size and build locally:
 ```bash
-npm run build
+bun run build
 # Check dist/ folder for bundle sizes
 ```
 
+### Bundle Analysis
+Generate a visual source-map report (requires a build with sourcemap):
+```bash
+bun run analyze:bundle
+# Opens: dist/index-explorer.html
+```
+
 ### Lighthouse
-Run Lighthouse audit for comprehensive metrics:
-- Open Chrome DevTools
-- Navigate to Lighthouse tab
-- Run audit on deployed site
+Run Lighthouse audit for comprehensive metrics using Bun:
+```bash
+bunx lighthouse https://cozygarage.github.io --output json --output-path=./lighthouse.json --chrome-flags='--headless'
+```
+If `bunx` is not available, you can also run the `audit:lighthouse` script:
+```bash
+bun run audit:lighthouse
+```
 
 ## Conclusion
 

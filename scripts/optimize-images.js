@@ -1,4 +1,12 @@
-#!/usr/bin/env node
+/**
+ * Image optimizer script
+ * - Scans `public/projects` for images (png/jpg/jpeg)
+ * - Generates AVIF and WebP at multiple widths and writes to `public/optimized/projects`
+ * - Keeps the original images untouched
+ *
+ * Usage: node scripts/optimize-images.js
+ */
+
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
@@ -17,6 +25,7 @@ async function processImage(file) {
   const ext = path.parse(file).ext.toLowerCase();
   const input = path.join(srcDir, file);
 
+  // Only process common raster formats
   if (!['.png', '.jpg', '.jpeg'].includes(ext)) {
     console.log(`Skipping unsupported file ${file}`);
     return;
@@ -56,6 +65,7 @@ async function main() {
     }
 
     for (const file of images) {
+       
       await processImage(file);
     }
 
