@@ -1,8 +1,16 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { projects } from '../../data/portfolio';
 import { Link, useParams } from 'react-router-dom';
 import './projects.css';
 import { OptimizedImage } from '../../shared/components/OptimizedImage';
+
+// Category icons for cleaner rendering
+const CATEGORY_ICONS: Record<string, string> = {
+  game: '🎮',
+  web: '🌐',
+  ml: '🤖',
+  other: '💡'
+};
 
 /**
  * Projects Page
@@ -13,7 +21,7 @@ export const ProjectsPage: React.FC = () => {
   const [selectedTech, setSelectedTech] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const categories = ['all', ...new Set(projects.map((p) => p.category))];
+  const categories = useMemo(() => ['all', ...new Set(projects.map((p) => p.category))], []);
   
   const allTechnologies = useMemo(() => {
     const techs = new Set<string>();
@@ -34,29 +42,43 @@ export const ProjectsPage: React.FC = () => {
     });
   }, [selectedCategory, selectedTech, searchQuery]);
 
+  const handleSearchChange = useCallback((e: React.ChangeEvent<globalThis.HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  }, []);
+
+  const clearSearch = useCallback(() => setSearchQuery(''), []);
+  
+  const resetFilters = useCallback(() => {
+    setSearchQuery('');
+    setSelectedCategory('all');
+    setSelectedTech('all');
+  }, []);
+
   return (
-    <div className="projects-page">
+    <main className="projects-page">
       <div className="container">
         <header className="projects-header">
           <h1>My Projects</h1>
-          <p>A collection of work I'm proud of</p>
+          <p>A collection of work I&apos;m proud of</p>
         </header>
 
         {/* Search and Filters */}
-        <div className="projects-controls">
+        <section className="projects-controls" aria-label="Project filters">
           <div className="search-box">
             <input
-              type="text"
+              type="search"
               placeholder="Search projects..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={handleSearchChange}
               className="search-input"
+              aria-label="Search projects"
             />
             {searchQuery && (
               <button
                 className="clear-search"
-                onClick={() => setSearchQuery('')}
+                onClick={clearSearch}
                 aria-label="Clear search"
+                type="button"
               >
                 ✕
               </button>
@@ -64,49 +86,53 @@ export const ProjectsPage: React.FC = () => {
           </div>
 
           <div className="filter-section">
-            <div className="filter-group">
-              <label className="filter-label">Category:</label>
-              <div className="projects-filter">
+            <fieldset className="filter-group">
+              <legend className="filter-label">Category:</legend>
+              <div className="projects-filter" role="group">
                 {categories.map((category) => (
                   <button
                     key={category}
                     className={`filter-btn ${selectedCategory === category ? 'active' : ''}`}
                     onClick={() => setSelectedCategory(category)}
+                    aria-pressed={selectedCategory === category}
+                    type="button"
                   >
                     {category.charAt(0).toUpperCase() + category.slice(1)}
                   </button>
                 ))}
               </div>
-            </div>
+            </fieldset>
 
-            <div className="filter-group">
-              <label className="filter-label">Technology:</label>
-              <div className="tech-filter">
+            <fieldset className="filter-group">
+              <legend className="filter-label">Technology:</legend>
+              <div className="tech-filter" role="group">
                 {allTechnologies.map((tech) => (
                   <button
                     key={tech}
                     className={`filter-btn ${selectedTech === tech ? 'active' : ''}`}
                     onClick={() => setSelectedTech(tech)}
+                    aria-pressed={selectedTech === tech}
+                    type="button"
                   >
                     {tech}
                   </button>
                 ))}
               </div>
-            </div>
+            </fieldset>
           </div>
-        </div>
+        </section>
 
         {/* Results count */}
         {(searchQuery || selectedCategory !== 'all' || selectedTech !== 'all') && (
-          <div className="projects-results">
+          <p className="projects-results" role="status" aria-live="polite">
             Found {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''}
-          </div>
+          </p>
         )}
 
-        <div className="projects-grid">
+        <div className="projects-grid" role="list">
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project) => (
-              <div key={project.id} className="project-card">
+              <article key={project.id} className="project-card" role="listitem">
                 {project.featured && <span className="featured-badge">Featured</span>}
                 <Link to={`/projects/${project.id}`} className="project-image-link">
                   <div className="project-image">
@@ -119,11 +145,8 @@ export const ProjectsPage: React.FC = () => {
                         className="project-image-element"
                       />
                     ) : (
-                      <div className="project-image-placeholder">
-                        {project.category === 'game' && '🎮'}
-                        {project.category === 'web' && '🌐'}
-                        {project.category === 'ml' && '🤖'}
-                        {project.category === 'other' && '💡'}
+                      <div className="project-image-placeholder" aria-hidden="true">
+                        {CATEGORY_ICONS[project.category] || '💡'}
                       </div>
                     )}
                   </div>
@@ -134,21 +157,21 @@ export const ProjectsPage: React.FC = () => {
                 </div>
                 </Link>
                 <div className="project-content">
-                  <h3>
+                  <h2>
                     <Link to={`/projects/${project.id}`}>{project.title}</Link>
-                  </h3>
+                  </h2>
                   <p>{project.description}</p>
-                  <div className="project-tech">
+                  <div className="project-tech" role="list" aria-label="Technologies">
                     {project.technologies.map((tech) => (
-                      <span
+                      <button
                         key={tech}
                         className="tech-tag"
                         onClick={() => setSelectedTech(tech)}
-                        role="button"
-                        tabIndex={0}
+                        type="button"
+                        aria-label={`Filter by ${tech}`}
                       >
                         {tech}
-                      </span>
+                      </button>
                     ))}
                   </div>
                   <div className="project-links">
@@ -169,18 +192,15 @@ export const ProjectsPage: React.FC = () => {
                     )}
                   </div>
                 </div>
-              </div>
+              </article>
             ))
           ) : (
-            <div className="no-results">
+            <div className="no-results" role="status">
               <p>No projects found matching your criteria.</p>
               <button
                 className="reset-filters"
-                onClick={() => {
-                  setSearchQuery('');
-                  setSelectedCategory('all');
-                  setSelectedTech('all');
-                }}
+                onClick={resetFilters}
+                type="button"
               >
                 Reset filters
               </button>
@@ -188,7 +208,7 @@ export const ProjectsPage: React.FC = () => {
           )}
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

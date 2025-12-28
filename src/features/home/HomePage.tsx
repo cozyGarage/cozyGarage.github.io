@@ -1,28 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { personalInfo, projects, skills } from '../../data';
-import { ContactForm } from '../../shared/components/ContactForm';
 import './home.css';
+
+// Lazy load ContactForm since it's below the fold
+const ContactForm = React.lazy(() => import('../../shared/components/ContactForm').then(m => ({ default: m.ContactForm })));
 
 // Define skill categories as a constant to avoid array recreation
 const SKILL_CATEGORIES = ['frontend', 'backend', 'ml', 'tools'] as const;
 
+// Category emoji map for cleaner code
+const CATEGORY_ICONS: Record<string, string> = {
+  game: '🎮',
+  web: '🌐',
+  ml: '🤖',
+  other: '💡'
+};
+
 // Memoized project card component
 const ProjectCard = React.memo<{ project: typeof projects[0] }>(({ project }) => (
-  <div className="project-card">
+  <article className="project-card">
     <div className="project-image">
-      <div className="project-image-placeholder">
-        {project.category === 'game' && '🎮'}
-        {project.category === 'web' && '🌐'}
-        {project.category === 'ml' && '🤖'}
+      <div className="project-image-placeholder" aria-hidden="true">
+        {CATEGORY_ICONS[project.category] || '💡'}
       </div>
     </div>
     <div className="project-content">
       <h3>{project.title}</h3>
       <p>{project.description}</p>
-      <div className="project-tech">
+      <div className="project-tech" role="list" aria-label="Technologies used">
         {project.technologies.slice(0, 3).map((tech) => (
-          <span key={tech} className="tech-tag">
+          <span key={tech} className="tech-tag" role="listitem">
             {tech}
           </span>
         ))}
@@ -45,7 +53,7 @@ const ProjectCard = React.memo<{ project: typeof projects[0] }>(({ project }) =>
         )}
       </div>
     </div>
-  </div>
+  </article>
 ));
 
 ProjectCard.displayName = 'ProjectCard';
@@ -68,16 +76,16 @@ export const HomePage: React.FC = () => {
   }), []);
 
   return (
-    <div className="landing-page">
-      {/* Hero Section */}
-      <section className="hero">
+    <main className="landing-page">
+      {/* Hero Section - Critical for LCP */}
+      <section className="hero" aria-label="Introduction">
         <div className="hero-content">
-          <h1 className="hero-title animate-fade-in">
+          <h1 className="hero-title">
             Hi, I&apos;m <span className="highlight">{personalInfo.name}</span>
           </h1>
-          <h2 className="hero-subtitle animate-fade-in-delay">{personalInfo.title}</h2>
-          <p className="hero-bio animate-fade-in-delay-2">{personalInfo.bio}</p>
-          <div className="hero-actions animate-fade-in-delay-3">
+          <p className="hero-subtitle" role="doc-subtitle">{personalInfo.title}</p>
+          <p className="hero-bio">{personalInfo.bio}</p>
+          <nav className="hero-actions" aria-label="Primary actions">
             <Link to="/projects" className="btn btn-primary">
               View Projects
             </Link>
@@ -87,9 +95,9 @@ export const HomePage: React.FC = () => {
             <a href="#contact" className="btn btn-outline">
               Get in Touch
             </a>
-          </div>
+          </nav>
         </div>
-        <div className="hero-graphic">
+        <aside className="hero-graphic" aria-hidden="true">
           <div className="floating-card">
             <div className="code-snippet">
               <pre>{`const developer = {
@@ -99,14 +107,14 @@ export const HomePage: React.FC = () => {
 };`}</pre>
             </div>
           </div>
-        </div>
+        </aside>
       </section>
 
       {/* Featured Projects */}
-      <section className="featured-projects">
+      <section className="featured-projects" aria-labelledby="featured-title">
         <div className="container">
-          <h2 className="section-title">Featured Projects</h2>
-          <div className="projects-grid">
+          <h2 id="featured-title" className="section-title">Featured Projects</h2>
+          <div className="projects-grid" role="list">
             {featuredProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
@@ -120,25 +128,26 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* Skills */}
-      <section className="skills">
+      <section className="skills" aria-labelledby="skills-title">
         <div className="container">
-          <h2 className="section-title">Skills & Technologies</h2>
+          <h2 id="skills-title" className="section-title">Skills & Technologies</h2>
           <div className="skills-grid">
             {SKILL_CATEGORIES.map((category) => {
               const categorySkills = skills.filter((s) => s.category === category);
+              const categoryLabels: Record<string, string> = {
+                frontend: '💻 Frontend',
+                backend: '⚙️ Backend',
+                ml: '🤖 Machine Learning',
+                tools: '🛠️ Tools'
+              };
               return (
                 <div key={category} className="skill-category">
-                  <h3 className="category-title">
-                    {category === 'frontend' && '💻 Frontend'}
-                    {category === 'backend' && '⚙️ Backend'}
-                    {category === 'ml' && '🤖 Machine Learning'}
-                    {category === 'tools' && '🛠️ Tools'}
-                  </h3>
+                  <h3 className="category-title">{categoryLabels[category]}</h3>
                   <ul className="skill-list">
                     {categorySkills.map((skill) => (
                       <li key={skill.name} className="skill-item">
                         <span className="skill-name">{skill.name}</span>
-                        <div className="skill-bar">
+                        <div className="skill-bar" role="progressbar" aria-valuenow={skill.level} aria-valuemin={0} aria-valuemax={5}>
                           <div
                             className="skill-level"
                             style={{ width: `${(skill.level / 5) * 100}%` }}
@@ -155,9 +164,9 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* About */}
-      <section className="about">
+      <section className="about" aria-labelledby="about-title">
         <div className="container">
-          <h2 className="section-title">About Me</h2>
+          <h2 id="about-title" className="section-title">About Me</h2>
           <div className="about-content">
             <div className="about-text">
               <p>
@@ -170,35 +179,37 @@ export const HomePage: React.FC = () => {
                 open-source projects, or playing strategic games like Othello (which I built
                 myself!).
               </p>
-              <div className="about-stats">
+              <dl className="about-stats">
                 <div className="stat">
-                  <div className="stat-number">{stats.projectsCount}+</div>
-                  <div className="stat-label">Projects</div>
+                  <dt className="stat-label">Projects</dt>
+                  <dd className="stat-number">{stats.projectsCount}+</dd>
                 </div>
                 <div className="stat">
-                  <div className="stat-number">{stats.skillsCount}+</div>
-                  <div className="stat-label">Skills</div>
+                  <dt className="stat-label">Skills</dt>
+                  <dd className="stat-number">{stats.skillsCount}+</dd>
                 </div>
                 <div className="stat">
-                  <div className="stat-number">∞</div>
-                  <div className="stat-label">Learning</div>
+                  <dt className="stat-label">Learning</dt>
+                  <dd className="stat-number">∞</dd>
                 </div>
-              </div>
+              </dl>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="contact">
+      {/* Contact - Lazy loaded */}
+      <section id="contact" className="contact" aria-labelledby="contact-title">
         <div className="container">
-          <h2 className="section-title">Get In Touch</h2>
-          <ContactForm />
+          <h2 id="contact-title" className="section-title">Get In Touch</h2>
+          <React.Suspense fallback={<div className="contact-loading">Loading contact form...</div>}>
+            <ContactForm />
+          </React.Suspense>
 
           {/* Alternative contact links */}
-          <div className="contact-links">
+          <nav className="contact-links" aria-label="Contact methods">
             <a href={`mailto:${personalInfo.email}`} className="contact-link">
-              <span className="icon">📧</span>
+              <span className="icon" aria-hidden="true">📧</span>
               Email
             </a>
             <a
@@ -207,7 +218,7 @@ export const HomePage: React.FC = () => {
               rel="noopener noreferrer"
               className="contact-link"
             >
-              <span className="icon">💻</span>
+              <span className="icon" aria-hidden="true">💻</span>
               GitHub
             </a>
             <a
@@ -216,12 +227,12 @@ export const HomePage: React.FC = () => {
               rel="noopener noreferrer"
               className="contact-link"
             >
-              <span className="icon">💼</span>
+              <span className="icon" aria-hidden="true">💼</span>
               LinkedIn
             </a>
-          </div>
+          </nav>
         </div>
       </section>
-    </div>
+    </main>
   );
 };

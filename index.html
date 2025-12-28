@@ -2,18 +2,76 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <meta name="description" content="A fully playable implementation of the classic Othello (Reversi) board game built with React and Bun">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0f0f0f" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    
+    <!-- SEO Meta Tags -->
+    <title>Trung Nguyen | Full Stack Developer & ML Enthusiast</title>
+    <meta name="description" content="Full Stack Developer specializing in React, TypeScript, and Machine Learning. View my portfolio of web applications, ML projects, and interactive games.">
+    <meta name="keywords" content="Trung Nguyen, Full Stack Developer, React Developer, TypeScript, Machine Learning, Web Development, Portfolio, Vienna">
+    <meta name="author" content="Trung Nguyen">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://cozygarage.github.io/">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cozygarage.github.io/">
+    <meta property="og:title" content="Trung Nguyen | Full Stack Developer & ML Enthusiast">
+    <meta property="og:description" content="Full Stack Developer specializing in React, TypeScript, and Machine Learning. View my portfolio of web applications, ML projects, and interactive games.">
+    <meta property="og:image" content="https://cozygarage.github.io/og-image.svg">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Trung Nguyen | Full Stack Developer">
+    <meta name="twitter:description" content="Full Stack Developer specializing in React, TypeScript, and Machine Learning.">
+    <meta name="twitter:image" content="https://cozygarage.github.io/og-image.svg">
+    
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://api.emailjs.com">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/src/styles/variables.css" as="style">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon-neutral.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="shortcut icon" href="/favicon-neutral.svg" type="image/svg+xml">
-    <title>Trung Nguyen - Let's build solutions</title>
-
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Trung Nguyen",
+        "url": "https://cozygarage.github.io",
+        "jobTitle": "Full Stack Developer",
+        "description": "Full Stack Developer & ML Enthusiast specializing in React, TypeScript, and Machine Learning",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Vienna",
+          "addressCountry": "Austria"
+        },
+        "sameAs": [
+          "https://github.com/cozyGarage",
+          "https://linkedin.com/in/nguyenthanhtrung8888"
+        ],
+        "knowsAbout": ["React", "TypeScript", "Machine Learning", "Web Development", "Python", "Node.js"]
+      }
+    </script>
+    
     <script type="module" crossorigin src="/src/index.tsx"></script>
   </head>
   <body>
     <noscript>
-      You need to enable JavaScript to run this app.
+      <div style="padding: 2rem; text-align: center; font-family: system-ui, sans-serif;">
+        <h1>Trung Nguyen - Portfolio</h1>
+        <p>Please enable JavaScript to view this portfolio website.</p>
+        <p>Contact: <a href="mailto:sendtotrungnguyen@outlook.com">sendtotrungnguyen@outlook.com</a></p>
+      </div>
     </noscript>
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>

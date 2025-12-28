@@ -3,6 +3,15 @@
   padding: var(--spacing-xl) 0;
 }
 
+/* Utility for optimized images */
+.project-image-element {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 .contact-form-card {
   max-width: 600px;
   margin: 0 auto;

@@ -1,15 +1,21 @@
 {
-  "short_name": "Portfolio",
-  "name": "Thanh Nguyen - Portfolio",
+  "short_name": "TN Portfolio",
+  "name": "Trung Nguyen - Full Stack Developer Portfolio",
+  "description": "Portfolio showcasing web development, React applications, and machine learning projects",
   "icons": [
     {
       "src": "/favicon-neutral.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ],
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#1a1a1a"
+  "orientation": "portrait-primary",
+  "theme_color": "#0f0f0f",
+  "background_color": "#0f0f0f",
+  "categories": ["portfolio", "developer", "personal"],
+  "prefer_related_applications": false
 }

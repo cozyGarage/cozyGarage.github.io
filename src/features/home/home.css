@@ -385,7 +385,7 @@
   box-shadow: 0 8px 30px rgba(var(--accent-primary-rgb), 0.18);
 }
 
-/* Animations */
+/* Animations - Use reduced motion media query for accessibility */
 @keyframes slideInLeft {
   from {
     opacity: 0;
@@ -408,22 +408,6 @@
   }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.6s ease-out;
-}
-
-.animate-fade-in-delay {
-  animation: fadeIn 0.6s ease-out 0.2s both;
-}
-
-.animate-fade-in-delay-2 {
-  animation: fadeIn 0.6s ease-out 0.4s both;
-}
-
-.animate-fade-in-delay-3 {
-  animation: fadeIn 0.6s ease-out 0.6s both;
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -433,6 +417,29 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-content,
+  .hero-graphic,
+  .floating-card {
+    animation: none;
+  }
+  
+  .project-card:hover,
+  .contact-link:hover,
+  .btn:hover {
+    transform: none;
+  }
+}
+
+/* Contact form loading state */
+.contact-loading {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
 }
 
 /* Responsive */

@@ -1,3 +1,11 @@
+# robots.txt for cozygarage.github.io
 # https://www.robotstxt.org/robotstxt.html
+
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap location
+Sitemap: https://cozygarage.github.io/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
