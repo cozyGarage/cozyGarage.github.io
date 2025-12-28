@@ -23,7 +23,10 @@
     "optimize-images": "bun ./scripts/optimize-images.js",
     "analyze:bundle": "bunx source-map-explorer 'dist/assets/*.js' --html dist/index-explorer.html",
     "audit:lighthouse": "bunx lighthouse https://cozygarage.github.io --output json --output-path=./lighthouse.json --chrome-flags='--headless' --quiet",
-    "clean": "rm -rf node_modules dist .turbo .cache"
+    "clean": "rm -rf node_modules dist .turbo .cache",
+    "admin": "bun run ./admin/server.ts",
+    "admin:dev": "bun run --watch ./admin/server.ts",
+    "dev:all": "bun run dev & bun run admin"
   },
   "devDependencies": {
     "@types/bun": "latest",
