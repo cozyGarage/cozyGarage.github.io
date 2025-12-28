@@ -4,6 +4,47 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [2.1.0] - 2025-12-28
+
+### Added
+- **SEO Optimizations**
+  - Comprehensive meta tags (Open Graph, Twitter Cards)
+  - JSON-LD structured data for Person schema
+  - sitemap.xml for search engines
+  - Social sharing OG image (og-image.svg)
+  - Resource hints (preconnect, dns-prefetch)
+
+- **Accessibility**
+  - ARIA labels throughout the site
+  - Semantic HTML (main, article, nav, section)
+  - Focus-visible states for keyboard navigation
+  - Reduced motion support via prefers-reduced-motion
+
+- **Documentation**
+  - New ARCHITECTURE.md with project structure overview
+  - Simplified README with quick start guide
+
+### Changed
+- **Performance**
+  - Lazy-load ContactForm component
+  - Reduced CSS bundle by 20%
+  - Improved filter button and tech tag styling
+  - Cleaner border styling on projects page
+
+- **Code Quality**
+  - Correct Suspense placement in Routes
+  - Memoized callbacks with useCallback
+  - Cleaner category icon mapping
+
+### Removed
+- Large chat.json development artifact (9.5MB)
+- Redundant documentation files
+- Husky git hooks directory
+
+### Fixed
+- React Router Suspense placement causing runtime errors
+- Projects page CSS border inconsistencies
+
 ## [2.0.0] - 2025-11-25
 
 ### Added

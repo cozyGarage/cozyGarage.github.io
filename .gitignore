@@ -55,3 +55,7 @@ Thumbs.db
 # Cache
 .cache
 .parcel-cache
+# Development artifacts
+src/data/chat.json
+*.chat.json
+lighthouse*.json
