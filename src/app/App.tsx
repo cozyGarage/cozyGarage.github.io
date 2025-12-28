@@ -39,26 +39,23 @@ export const App: React.FC = () => {
             }
           />
 
-          <React.Suspense fallback={<Loading />}>
-
-
           {/* Projects Page */}
           <Route
             path="/projects"
             element={
-              <>
+              <React.Suspense fallback={<Loading />}>
                 <Navbar />
                 <ProjectsPage />
-              </>
+              </React.Suspense>
             }
           />
           <Route
             path="/projects/:id"
             element={
-              <>
+              <React.Suspense fallback={<Loading />}>
                 <Navbar />
                 <ProjectDetailPage />
-              </>
+              </React.Suspense>
             }
           />
 
@@ -66,19 +63,19 @@ export const App: React.FC = () => {
           <Route
             path="/blog"
             element={
-              <>
+              <React.Suspense fallback={<Loading />}>
                 <Navbar />
                 <BlogPage />
-              </>
+              </React.Suspense>
             }
           />
           <Route
             path="/blog/:id"
             element={
-              <>
+              <React.Suspense fallback={<Loading />}>
                 <Navbar />
                 <BlogPostPage />
-              </>
+              </React.Suspense>
             }
           />
 
@@ -86,17 +83,16 @@ export const App: React.FC = () => {
           <Route
             path="/play"
             element={
-              <>
+              <React.Suspense fallback={<Loading />}>
                 <Navbar />
                 <GamePage />
-              </>
+              </React.Suspense>
             }
           />
 
           {/* Redirects and 404 */}
           <Route path="/othello" element={<Navigate to="/play" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
-          </React.Suspense>
           </Routes>
         </div>
       </BrowserRouter>
