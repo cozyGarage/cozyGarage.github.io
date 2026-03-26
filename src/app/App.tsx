@@ -11,6 +11,7 @@ const ProjectDetailPage = React.lazy(() => import('../features/projects/Projects
 const BlogPage = React.lazy(() => import('../features/blog/BlogPage').then(m => ({ default: m.BlogPage })));
 const BlogPostPage = React.lazy(() => import('../features/blog/BlogPage').then(m => ({ default: m.BlogPostPage })));
 const GamePage = React.lazy(() => import('../features/game/GamePage').then(m => ({ default: m.GamePage })));
+const BookPage = React.lazy(() => import('../features/book/BookPage').then(m => ({ default: m.BookPage })));
 
 
 // Import global styles
@@ -86,6 +87,17 @@ export const App: React.FC = () => {
               <React.Suspense fallback={<Loading />}>
                 <Navbar />
                 <GamePage />
+              </React.Suspense>
+            }
+          />
+
+          {/* Book a Call page */}
+          <Route
+            path="/book"
+            element={
+              <React.Suspense fallback={<Loading />}>
+                <Navbar />
+                <BookPage />
               </React.Suspense>
             }
           />

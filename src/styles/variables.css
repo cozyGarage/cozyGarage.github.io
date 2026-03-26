@@ -1,120 +1,133 @@
 /* ========================================
    CSS VARIABLES - Design System
    Single source of truth for colors, spacing, etc.
+   Color Scheme: "Violet Depths" — deep indigo/purple base with lavender accents
+   Typography: Plus Jakarta Sans (headings) · Inter (body) · JetBrains Mono (code)
    ======================================== */
 
 :root {
-  /* Colors - Dark Theme (Default) */
-  --bg-primary: #0f0f0f;
-  --bg-secondary: #1a1a1a;
-  --bg-tertiary: #2a2a2a;
+  /* ---- Typography ---- */
+  --font-heading: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
 
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.85);
-  --text-tertiary: rgba(255, 255, 255, 0.6);
+  /* ---- Colors - Dark Theme (Default) ---- */
+  --bg-primary: #13111c;
+  --bg-secondary: #1e1b2e;
+  --bg-tertiary: #2a2640;
 
-  --accent-primary: #00b4d8;
-  --accent-secondary: #0096c7;
-  --accent-primary-rgb: 0, 180, 216;
+  --text-primary: #f8f7ff;
+  --text-secondary: rgba(248, 247, 255, 0.8);
+  --text-tertiary: rgba(248, 247, 255, 0.5);
 
-  /* Original color variables for game board */
-  --color-bg-primary: #1a1a1a;
-  --color-bg-secondary: #2a2a2a;
-  --color-bg-tertiary: #3a3a3a;
+  /* Violet / lavender accent */
+  --accent-primary: #a78bfa;
+  --accent-secondary: #7c3aed;
+  --accent-primary-rgb: 167, 139, 250;
 
-  --color-text-primary: #ffffff;
-  --color-text-secondary: rgba(255, 255, 255, 0.7);
-  --color-text-muted: rgba(255, 255, 255, 0.5);
+  /* Warm rose CTA accent */
+  --accent-cta: #fb7185;
+  --accent-cta-rgb: 251, 113, 133;
 
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-border-hover: rgba(255, 255, 255, 0.2);
+  /* ---- Legacy game-board color variables (kept for game feature) ---- */
+  --color-bg-primary: #1e1b2e;
+  --color-bg-secondary: #2a2640;
+  --color-bg-tertiary: #3b3660;
+
+  --color-text-primary: #f8f7ff;
+  --color-text-secondary: rgba(248, 247, 255, 0.7);
+  --color-text-muted: rgba(248, 247, 255, 0.5);
+
+  --color-border: rgba(167, 139, 250, 0.15);
+  --color-border-hover: rgba(167, 139, 250, 0.3);
 
   /* Accent Colors */
-  --color-accent-green: #4caf50;
-  --color-accent-blue: #2196f3;
-  --color-accent-red: #f44336;
+  --color-accent-green: #34d399;
+  --color-accent-blue: #60a5fa;
+  --color-accent-red: #fb7185;
 
   /* Board Colors */
   --color-board-dark: #2c5f2d;
   --color-board-light: #97d077;
-  --color-board-bg: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  --color-board-bg: linear-gradient(135deg, #2a2640 0%, #1e1b2e 100%);
 
-  /* Spacing */
+  /* ---- Spacing ---- */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
 
-  /* Border Radius */
+  /* ---- Border Radius ---- */
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
 
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  /* ---- Shadows ---- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 24px rgba(167, 139, 250, 0.2);
 
-  /* Transitions */
+  /* ---- Transitions ---- */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.2s ease;
   --transition-slow: 0.3s ease;
 
-  /* Layout */
-  --navbar-height: 60px;
+  /* ---- Layout ---- */
+  --navbar-height: 64px;
   --sidebar-width: 320px;
   --board-max-size: min(85vh, 700px);
 
-  /* Z-index layers */
+  /* ---- Z-index layers ---- */
   --z-navbar: 100;
   --z-menu: 200;
   --z-modal: 300;
   --z-loading: 400;
 }
 
-/* Light Theme */
+/* ---- Light Theme ---- */
 [data-theme="light"] {
-  /* Colors - Light Theme */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --bg-tertiary: #e9ecef;
+  --bg-primary: #fafafe;
+  --bg-secondary: #f0effe;
+  --bg-tertiary: #e4e0fd;
 
-  --text-primary: #212529;
-  --text-secondary: rgba(33, 37, 41, 0.85);
-  --text-tertiary: rgba(33, 37, 41, 0.6);
+  --text-primary: #1a1628;
+  --text-secondary: rgba(26, 22, 40, 0.8);
+  --text-tertiary: rgba(26, 22, 40, 0.55);
 
-  --accent-primary: #007bff;
-  --accent-secondary: #0056b3;
-  --accent-primary-rgb: 0, 123, 255;
+  --accent-primary: #7c3aed;
+  --accent-secondary: #5b21b6;
+  --accent-primary-rgb: 124, 58, 237;
 
-  /* Original color variables for game board */
-  --color-bg-primary: #f8f9fa;
-  --color-bg-secondary: #e9ecef;
-  --color-bg-tertiary: #dee2e6;
+  --accent-cta: #e11d48;
+  --accent-cta-rgb: 225, 29, 72;
 
-  --color-text-primary: #212529;
-  --color-text-secondary: rgba(33, 37, 41, 0.7);
-  --color-text-muted: rgba(33, 37, 41, 0.5);
+  /* Legacy game-board color variables */
+  --color-bg-primary: #f0effe;
+  --color-bg-secondary: #e4e0fd;
+  --color-bg-tertiary: #cfc8fb;
 
-  --color-border: rgba(0, 0, 0, 0.1);
-  --color-border-hover: rgba(0, 0, 0, 0.2);
+  --color-text-primary: #1a1628;
+  --color-text-secondary: rgba(26, 22, 40, 0.7);
+  --color-text-muted: rgba(26, 22, 40, 0.5);
 
-  /* Accent Colors */
-  --color-accent-green: #28a745;
-  --color-accent-blue: #007bff;
-  --color-accent-red: #dc3545;
+  --color-border: rgba(124, 58, 237, 0.15);
+  --color-border-hover: rgba(124, 58, 237, 0.3);
 
-  /* Board Colors */
+  --color-accent-green: #059669;
+  --color-accent-blue: #2563eb;
+  --color-accent-red: #e11d48;
+
   --color-board-dark: #2c5f2d;
   --color-board-light: #97d077;
-  --color-board-bg: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+  --color-board-bg: linear-gradient(135deg, #e4e0fd 0%, #f0effe 100%);
 
-  /* Shadows - Lighter for light theme */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 2px 8px rgba(26, 22, 40, 0.1);
+  --shadow-md: 0 4px 20px rgba(26, 22, 40, 0.12);
+  --shadow-lg: 0 8px 40px rgba(26, 22, 40, 0.18);
+  --shadow-glow: 0 0 24px rgba(124, 58, 237, 0.15);
 }
 
 /* Large desktop: Even bigger board */

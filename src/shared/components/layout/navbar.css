@@ -19,8 +19,9 @@
 
 /* Logo/Brand */
 .navbar-brand {
+  font-family: var(--font-heading);
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 700;
   color: var(--color-text-primary);
   text-decoration: none;
   display: flex;
@@ -79,6 +80,23 @@
   background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-primary) 100%);
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
+}
+
+/* Book a Call CTA button in navbar */
+.nav-link-cta {
+  background: linear-gradient(135deg, var(--accent-cta) 0%, #e05674 100%);
+  color: white !important;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+}
+
+.nav-link-cta:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(var(--accent-cta-rgb), 0.35);
+  background: linear-gradient(135deg, var(--accent-cta) 0%, #e05674 100%) !important;
 }
 
 /* Mobile/Desktop visibility helpers for Play button */

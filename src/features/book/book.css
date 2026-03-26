@@ -1,0 +1,175 @@
+/* ── Book a Call Page / Section ── */
+
+.book-page {
+  width: 100%;
+  background: var(--bg-primary);
+  min-height: calc(100vh - var(--navbar-height));
+  padding-top: var(--navbar-height);
+}
+
+.book-call-section {
+  padding: 6rem 2rem;
+}
+
+.book-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.book-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── Two-column layout ── */
+.book-content {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ── Info panel ── */
+.book-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.book-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.book-features li {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.feature-icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.book-features li div strong {
+  display: block;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.book-features li div p {
+  color: var(--text-tertiary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Setup notice ── */
+.book-placeholder-notice {
+  background: rgba(var(--accent-primary-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-primary-rgb), 0.25);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.book-placeholder-notice code {
+  background: rgba(var(--accent-primary-rgb), 0.15);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--accent-primary);
+}
+
+/* ── Calendar panel ── */
+.book-calendar {
+  min-height: 500px;
+}
+
+.calendly-inline-container {
+  min-height: 650px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+/* ── Placeholder calendar ── */
+.calendar-placeholder {
+  background: var(--bg-secondary);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-xl);
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+
+.calendar-placeholder-inner {
+  text-align: center;
+  max-width: 360px;
+}
+
+.calendar-placeholder-icon {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-placeholder-inner h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.calendar-placeholder-inner p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-placeholder-inner code {
+  background: rgba(var(--accent-primary-rgb), 0.12);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--accent-primary);
+}
+
+.calendar-placeholder-inner a:not(.btn) {
+  color: var(--accent-primary);
+  text-decoration: underline;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .book-content {
+    grid-template-columns: 1fr;
+  }
+
+  .book-calendar {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .book-call-section {
+    padding: 3rem 1rem;
+  }
+}
