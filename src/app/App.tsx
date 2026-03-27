@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ThemeProvider } from '../shared/utils/theme';
 import { Navbar } from '../shared/components/layout/Navbar';
+import { Footer } from '../shared/components/layout/Footer';
 import { HomePage } from '../features/home/HomePage';
 import { Loading } from '../shared/components/Loading';
 
@@ -11,6 +12,7 @@ const ProjectDetailPage = React.lazy(() => import('../features/projects/Projects
 const BlogPage = React.lazy(() => import('../features/blog/BlogPage').then(m => ({ default: m.BlogPage })));
 const BlogPostPage = React.lazy(() => import('../features/blog/BlogPage').then(m => ({ default: m.BlogPostPage })));
 const GamePage = React.lazy(() => import('../features/game/GamePage').then(m => ({ default: m.GamePage })));
+const BookPage = React.lazy(() => import('../features/book/BookPage').then(m => ({ default: m.BookPage })));
 
 
 // Import global styles
@@ -35,6 +37,7 @@ export const App: React.FC = () => {
               <>
                 <Navbar />
                 <HomePage />
+                <Footer />
               </>
             }
           />
@@ -46,6 +49,7 @@ export const App: React.FC = () => {
               <React.Suspense fallback={<Loading />}>
                 <Navbar />
                 <ProjectsPage />
+                <Footer />
               </React.Suspense>
             }
           />
@@ -55,6 +59,7 @@ export const App: React.FC = () => {
               <React.Suspense fallback={<Loading />}>
                 <Navbar />
                 <ProjectDetailPage />
+                <Footer />
               </React.Suspense>
             }
           />
@@ -66,6 +71,7 @@ export const App: React.FC = () => {
               <React.Suspense fallback={<Loading />}>
                 <Navbar />
                 <BlogPage />
+                <Footer />
               </React.Suspense>
             }
           />
@@ -75,6 +81,7 @@ export const App: React.FC = () => {
               <React.Suspense fallback={<Loading />}>
                 <Navbar />
                 <BlogPostPage />
+                <Footer />
               </React.Suspense>
             }
           />
@@ -86,6 +93,18 @@ export const App: React.FC = () => {
               <React.Suspense fallback={<Loading />}>
                 <Navbar />
                 <GamePage />
+              </React.Suspense>
+            }
+          />
+
+          {/* Book a Call page */}
+          <Route
+            path="/book"
+            element={
+              <React.Suspense fallback={<Loading />}>
+                <Navbar />
+                <BookPage />
+                <Footer />
               </React.Suspense>
             }
           />

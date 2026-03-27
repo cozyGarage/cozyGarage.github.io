@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { personalInfo, projects, skills } from '../../data';
 import './home.css';
 
-// Lazy load ContactForm since it's below the fold
+// Lazy load below-the-fold components
 const ContactForm = React.lazy(() => import('../../shared/components/ContactForm').then(m => ({ default: m.ContactForm })));
+const NewsletterForm = React.lazy(() => import('../../shared/components/NewsletterForm').then(m => ({ default: m.NewsletterForm })));
+const BookCallSection = React.lazy(() => import('../book/BookPage').then(m => ({ default: m.BookCallSection })));
 
 // Define skill categories as a constant to avoid array recreation
 const SKILL_CATEGORIES = ['frontend', 'backend', 'ml', 'tools'] as const;
@@ -60,7 +62,7 @@ ProjectCard.displayName = 'ProjectCard';
 
 /**
  * Home Page - Portfolio Landing Page
- * Hero section, featured projects, skills, about, and contact
+ * Hero section, featured projects, skills, about, book a call, newsletter, and contact
  */
 export const HomePage: React.FC = () => {
   // Memoize featured projects to avoid filtering on every render
@@ -89,8 +91,8 @@ export const HomePage: React.FC = () => {
             <Link to="/projects" className="btn btn-primary">
               View Projects
             </Link>
-            <Link to="/play" className="btn btn-secondary">
-              Play Othello ⚫⚪
+            <Link to="/book" className="btn btn-cta">
+              Book a Call 📅
             </Link>
             <a href="#contact" className="btn btn-outline">
               Get in Touch
@@ -195,6 +197,21 @@ export const HomePage: React.FC = () => {
               </dl>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Book a Call - Lazy loaded */}
+      <React.Suspense fallback={<div className="section-loading">Loading…</div>}>
+        <BookCallSection />
+      </React.Suspense>
+
+      {/* Newsletter - Lazy loaded */}
+      <section className="newsletter-section" aria-labelledby="newsletter-title">
+        <div className="container">
+          <h2 id="newsletter-title" className="section-title">Newsletter</h2>
+          <React.Suspense fallback={<div className="section-loading">Loading…</div>}>
+            <NewsletterForm />
+          </React.Suspense>
         </div>
       </section>
 

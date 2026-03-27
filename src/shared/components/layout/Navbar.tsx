@@ -87,11 +87,11 @@ export const Navbar: React.FC = () => {
         </li>
         <li className="nav-item">
           <Link
-            className={`nav-link primary ${location.pathname === '/play' ? 'active' : ''}`}
-            to="/play"
+            className={`nav-link nav-link-cta ${location.pathname === '/book' ? 'active' : ''}`}
+            to="/book"
             onClick={closeMobileMenu}
           >
-            Play Othello ⚫⚪
+            Book a Call 📅
           </Link>
         </li>
       </ul>
