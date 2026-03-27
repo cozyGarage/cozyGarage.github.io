@@ -2,11 +2,25 @@ import React, { useEffect, useRef } from 'react';
 import './book.css';
 
 /**
- * CALENDLY_URL
+ * SCHEDULING_URL
  * Replace with your own Calendly (or Cal.com) scheduling link.
- * e.g. "https://calendly.com/your-name/30min"
+ * e.g. "https://calendly.com/your-name/30min" or "https://cal.com/your-name/30min"
  */
-const CALENDLY_URL = 'https://calendly.com/YOUR_USERNAME/30min';
+const SCHEDULING_URL = 'https://calendly.com/YOUR_USERNAME/30min';
+
+/** Minimal type for the Calendly global injected by their widget script */
+interface CalendlyGlobal {
+  initInlineWidget: (options: {
+    url: string;
+    parentElement: HTMLElement;
+    prefill?: Record<string, unknown>;
+    utm?: Record<string, unknown>;
+  }) => void;
+}
+
+/** Safely access the Calendly global — returns undefined before the script loads */
+const getCalendly = (): CalendlyGlobal | undefined =>
+  (window as unknown as { Calendly?: CalendlyGlobal }).Calendly;
 
 interface CalendlyWidgetProps {
   url: string;
@@ -21,6 +35,18 @@ const CalendlyWidget: React.FC<CalendlyWidgetProps> = ({ url }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const initWidget = () => {
+      const calendly = getCalendly();
+      if (containerRef.current && calendly) {
+        calendly.initInlineWidget({
+          url,
+          parentElement: containerRef.current,
+          prefill: {},
+          utm: {},
+        });
+      }
+    };
+
     // Inject Calendly stylesheet
     const linkId = 'calendly-css';
     if (!document.getElementById(linkId)) {
@@ -38,27 +64,11 @@ const CalendlyWidget: React.FC<CalendlyWidgetProps> = ({ url }) => {
       script.id = scriptId;
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
       script.async = true;
-      script.onload = () => {
-        if (containerRef.current && (window as any).Calendly) {
-          (window as any).Calendly.initInlineWidget({
-            url,
-            parentElement: containerRef.current,
-            prefill: {},
-            utm: {},
-          });
-        }
-      };
+      script.onload = initWidget;
       document.head.appendChild(script);
     } else {
       // Script already loaded — init widget directly
-      if (containerRef.current && (window as any).Calendly) {
-        (window as any).Calendly.initInlineWidget({
-          url,
-          parentElement: containerRef.current,
-          prefill: {},
-          utm: {},
-        });
-      }
+      initWidget();
     }
   }, [url]);
 
@@ -70,7 +80,7 @@ const CalendlyWidget: React.FC<CalendlyWidgetProps> = ({ url }) => {
  * Can be used as a standalone section in any page or as a full page via /book.
  */
 export const BookCallSection: React.FC = () => {
-  const isPlaceholder = CALENDLY_URL.includes('YOUR_USERNAME');
+  const isPlaceholder = SCHEDULING_URL.includes('YOUR_USERNAME');
 
   return (
     <section className="book-call-section" id="book" aria-labelledby="book-title">
@@ -112,7 +122,7 @@ export const BookCallSection: React.FC = () => {
             {isPlaceholder && (
               <div className="book-placeholder-notice" role="note">
                 <strong>👋 Setup needed:</strong> Replace{' '}
-                <code>CALENDLY_URL</code> in{' '}
+                <code>SCHEDULING_URL</code> in{' '}
                 <code>src/features/book/BookPage.tsx</code> with your own
                 Calendly (or Cal.com) scheduling link.
               </div>
@@ -156,7 +166,7 @@ export const BookCallSection: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <CalendlyWidget url={CALENDLY_URL} />
+              <CalendlyWidget url={SCHEDULING_URL} />
             )}
           </div>
         </div>
